@@ -1,0 +1,839 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1112</x>
+      <y>800</y>
+      <w>336</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+com::isador::jspe::core::Node
+--
++ getId(): String
++ getTitle(): String
++ getChildList(): List&lt;Node&gt;
++ addChild(node: Node): void
++ addConsumption(payload: Payload, consumption: Double): void 
++ removeConsumption(payload: Payload): void
++ getConsumptionMap(): Map&lt;Payload, Double&gt;
++ calculateConsumption(): Map&lt;Payload, Double&gt;
++ isValid(): boolean
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1264</x>
+      <y>1568</y>
+      <w>192</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>com::isador::jspe::core::nodes::Basic
+--
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>304</y>
+      <w>176</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>com::isador::jspe::core::Payload
+--
+- id: String
+- title: String
+--
++ Payload()
++ Payload(title: String)
++ Payload(id: String, title: String)
+--
++ getId(): String
++ setId(id: String): void
+
++ getTitle(): String
++ setTitle(title: String): void
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>928</x>
+      <y>1168</y>
+      <w>216</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>com::isador::jspe::core::nodes::Expanded
+--
+- model: Model
+--
++ getModel(): Model
++ setModel(model: Model): void
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1264</x>
+      <y>1344</y>
+      <w>240</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>com::isador::jspe::core::nodes::Repetition
+--
+- repetitionChildList: List&lt;Node&gt;
+- repeatCount: Integer
+--
++ getRepetitionChildList(): List&lt;Node&gt;
++ addRepetitionChild(node: Node): void
+
++ getRepeatCount(): Integer
++ setRepeatCount(repeatCount: Integer): void
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1264</x>
+      <y>1168</y>
+      <w>272</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>com::isador::jspe::core::nodes::Case
+--
+- caseChildMap: Map&lt;Node, Float&gt;
+--
++ getCaseChildMap(): Map&lt;Node, Float&gt;
++ addCaseChild(node: Node, probability: Float): void
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1264</x>
+      <y>1256</y>
+      <w>200</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>com::isador::jspe::core::nodes::Pardo
+--
+- pardoChildList: List&lt;Node&gt;
+--
++ getPardoChildList(): List&lt;Node&gt;
++ addPardoChild(node: Node): void
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1264</x>
+      <y>1480</y>
+      <w>192</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>com::isador::jspe::core::nodes::Split
+--
+- splitChildList: List&lt;Node&gt;
+--
++ getSplitChildList(): List&lt;Node&gt;
++ addSplitChild(node: Node): void
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1200</x>
+      <y>1152</y>
+      <w>80</w>
+      <h>448</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;540.0;80.0;540.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1136</x>
+      <y>1152</y>
+      <w>88</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>90.0;10.0;90.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1200</x>
+      <y>1152</y>
+      <w>80</w>
+      <h>264</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;310.0;80.0;310.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1200</x>
+      <y>1152</y>
+      <w>80</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0;80.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1200</x>
+      <y>1152</y>
+      <w>80</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;180.0;80.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1200</x>
+      <y>1152</y>
+      <w>80</w>
+      <h>384</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;460.0;81.0;460.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1112</x>
+      <y>1000</y>
+      <w>368</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>/com::isador::jspe::core::nodes::AbstractNode/
+--
+# id: String
+# title: String
+_# childList: List&lt;Node&gt;_
+# consumptionMap: Map&lt;Payload, Double&gt;
+--
++ AbstractNode()
+--
++ setId(id: String): void
++ setTitle(title: String): void
++ setChildList(childList: List&lt;Node&gt;): void
++ setConsumptionMap(consumptionMap: Map&lt;Payload, Double&gt;): void
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1224</x>
+      <y>952</y>
+      <w>24</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;57.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1240</x>
+      <y>704</y>
+      <w>144</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Iterable&lt;Node&gt;
+--
++ iterator(): Iterator&lt;Node&gt;
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1296</x>
+      <y>752</y>
+      <w>24</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>304</y>
+      <w>232</w>
+      <h>256</h>
+    </coordinates>
+    <panel_attributes>com::isador::jspe::core::Resource
+--
+- id: String
+- title: String
+- serviceUnit: String
+- serviceTime: double
+--
++ Resource()
++ Resource(id: String, title: String)
+--
++ getId(): String
++ setId(id: String): void
+
++ getTitle(): String
++ setTitle(title: String): void
+
++ getServiceUnit(): String
++ setServiceUnit(serviceUnit: String): void
+
++ getServiceTime(): double
++ setServiceTime(serviceTime: double): void
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1512</x>
+      <y>792</y>
+      <w>200</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>com::isador::jspe::core::NodesIterator
+--
+_- queue: Queue&lt;Node&gt;_
+_- markedNodes: Collection&lt;String&gt;_
+- cyclicNode: Node
+--
++ NodesIterator(node: Node)
+--
++ getCyclicNode(): Optional&lt;Node&gt;
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1568</x>
+      <y>704</y>
+      <w>88</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Iterator&lt;Node&gt;
+--
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1600</x>
+      <y>744</y>
+      <w>24</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>264</x>
+      <y>1128</y>
+      <w>528</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>com::isador::jspe::core::SimpleOverheadMatrix
+--
+- payloadMatrix: PayloadMatrix
+- payloadConsumption: Map&lt;Payload, Double&gt;
+--
++ SimpleOverheadMatrix()
++ SimpleOverheadMatrix(payloadMatrix: PayloadMatrix, payloadConsumption: Map&lt;Payload, Double&gt;)
+--
++ getPayloadMatrix(): PayloadMatrix
++ setPayloadMatrix(payloadMatrix: PayloadMatrix): void
+
++ getPayloadConsumption(): Map&lt;Payload, Double&gt;
++ setPayloadConsumption(payloadConsumption: Map&lt;Payload, Double&gt;): void
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>664</y>
+      <w>208</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>com::isador::jspe::core::Tuple&lt;X, Y, V&gt;
+--
+- x: X
+- y: Y
+- v: V
+--
++ Tuple(x: X, y: Y, v: V)
++ Tuple()
+--
++ getX(): X
++ setX(x: X): void
+
++ getY(): Y
++ setY(y: Y): void
+
++ getV(): V
++ setV(v: V): void
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>832</y>
+      <w>320</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>com::isador::jspe::core::SimplePayloadMatrix
+--
+- consumptionMatrix: List&lt;Tuple&lt;Resource, Payload, Double&gt;&gt;
+--
++ SimplePayloadMatrix()
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>592</x>
+      <y>968</y>
+      <w>288</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+com::isador::jspe::core::OverheadMatrix
+--
++ getResources(): Set&lt;Resource&gt;
++ getResourceConsumption(): Map&lt;Resource, Double&gt;
+
++ getPayloads(): Set&lt;Payload&gt;
++ getPayloadConsumption(): Map&lt;Payload, Double&gt;
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>760</x>
+      <y>664</y>
+      <w>216</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+com::isador::jspe::core::Model
+--
++ getPayloadMatrix(): PayloadMatrix
++ getNode(id: String): Node
++ getOverheadMatrix(): OverheadMatrix
++ validate(): void {InvalidModelException}
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>720</x>
+      <y>1072</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>488</x>
+      <y>704</y>
+      <w>48</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>200</x>
+      <y>712</y>
+      <w>104</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=*</panel_attributes>
+    <additional_attributes>110.0;180.0;60.0;180.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>216</x>
+      <y>880</y>
+      <w>88</w>
+      <h>376</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=*
+m2=*</panel_attributes>
+    <additional_attributes>90.0;10.0;40.0;10.0;40.0;440.0;10.0;440.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>224</x>
+      <y>864</y>
+      <w>80</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=*
+m2=*</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>488</x>
+      <y>888</y>
+      <w>32</w>
+      <h>256</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;300.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>704</x>
+      <y>656</y>
+      <w>72</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>70.0;80.0;12.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>768</x>
+      <y>752</y>
+      <w>32</w>
+      <h>232</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;270.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>968</x>
+      <y>680</y>
+      <w>232</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;260.0;10.0;260.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1400</x>
+      <y>760</y>
+      <w>88</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=*</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0;90.0;10.0;90.0;80.0;60.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1440</x>
+      <y>840</y>
+      <w>88</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>808</x>
+      <y>1264</y>
+      <w>384</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>com::isador::jspe::core::nodes::NodeBuilder
+--
++ withType(type: Class&lt;Node&gt;): NodeBuilder
++ withId(id: String): NodeBuilder
++ withTitle(title: String): NodeBuilder
++ withChild(nodeBuilder: NodeBuilder): NodeBuilder
++ withConsumption(payload: Payload, consumption: Double): NodeBuilder
+
++ withCaseChild(nodeBuilder: NodeBuilder, probability: float): NodeBuilder
++ withPardoChild(nodeBuilder: NodeBuilder): NodeBuilder
++ withRepetitionChild(nodeBuilder: NodeBuilder): NodeBuilder
++ withRepeatCount(repeatCount: Integer): NodeBuilder
++ withSplitChild(nodeBuilder: NodeBuilder): NodeBuilder
++ withModel(model: Model): NodeBuilder
+
++ build(): Node
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1440</x>
+      <y>944</y>
+      <w>144</w>
+      <h>288</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=*</panel_attributes>
+    <additional_attributes>120.0;330.0;160.0;330.0;160.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1416</x>
+      <y>928</y>
+      <w>176</w>
+      <h>392</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=*</panel_attributes>
+    <additional_attributes>60.0;460.0;200.0;460.0;200.0;10.0;15.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1440</x>
+      <y>912</y>
+      <w>160</w>
+      <h>512</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=*</panel_attributes>
+    <additional_attributes>80.0;610.0;180.0;610.0;180.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>968</x>
+      <y>712</y>
+      <w>152</w>
+      <h>472</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=*</panel_attributes>
+    <additional_attributes>160.0;570.0;160.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1440</x>
+      <y>896</y>
+      <w>168</w>
+      <h>640</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=*</panel_attributes>
+    <additional_attributes>20.0;770.0;190.0;770.0;190.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>792</x>
+      <y>808</y>
+      <w>288</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>com::isador::jspe::core::SimpleModel
+--
+- payloadMatrix: PayloadMatrix
+- node: Node
+--
++ setPayloadMatrix(payloadMatrix: PayloadMatrix): void
+
++ getNode(): Node
++ setNode(node: Node): void
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>872</x>
+      <y>752</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>208</x>
+      <y>1248</y>
+      <w>72</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>16</y>
+      <w>88</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+java::lang::Map
+--
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>808</x>
+      <y>152</y>
+      <w>192</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+com::isador::jspe::core::Node
+--
++ getId(): String
++ getTitle(): String
++ addChild(node: Node): void
++ getChildList(): List&lt;Node&gt;
++ getPayloadMatrix(): PayloadMatrix
++ isValid(): boolean
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1040</x>
+      <y>8</y>
+      <w>384</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+com::isador::jspe::core::ResourceCalculator
+--
++ calculate(resourceMatrix: ResourceMatrix, node: Node): OverheadMatrix
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1136</x>
+      <y>80</y>
+      <w>208</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+com::isador::jspe::core::OverheadMatrix
+--
++ getResourceMatrix(): ResourceMatrix
++ getPayloadMatrix(): PayloadMatrix
++ getServiceTime(): double
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>792</x>
+      <y>0</y>
+      <w>216</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+com::isador::jspe::core::Model
+--
++ getNode(id: String): Node
++ getPayloadMatrix(): PayloadMatrix
++ getOverheadMatrix(): OverheadMatrix
++ validate(): void {InvalidModelException}
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>136</y>
+      <w>192</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+com::isador::jspe::core::Matrix&lt;T&gt;
+--
++ setQuantity(t: T, quantity: int): void
++ put(t: T)
++ plus(matrix: Matrix&lt;T&gt;): Matrix&lt;T&gt;
+style=autoresize</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

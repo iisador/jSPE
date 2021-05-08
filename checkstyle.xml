@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+        "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+    <property name="charset" value="UTF-8"/>
+    <property name="severity" value="error"/>
+    <property name="fileExtensions" value="java, properties, xml"/>
+    <property name="tabWidth" value="4"/>
+
+    <module name="Translation"/>
+    <module name="FileLength"/>
+    <module name="LineLength">
+        <property name="max" value="120"/>
+    </module>
+    <module name="FileTabCharacter"/>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="\s+$"/>
+        <property name="minimum" value="0"/>
+        <property name="maximum" value="0"/>
+        <property name="message" value="Line has trailing spaces."/>
+    </module>
+    <module name="TreeWalker">
+        <module name="AtclauseOrder">
+            <property name="target" value="CLASS_DEF"/>
+            <property name="target" value="INTERFACE_DEF"/>
+            <property name="target" value="ENUM_DEF"/>
+            <property name="target" value="METHOD_DEF"/>
+            <property name="target" value="CTOR_DEF"/>
+            <property name="target" value="VARIABLE_DEF"/>
+            <property name="tagOrder" value="@param"/>
+            <property name="tagOrder" value="@return"/>
+            <property name="tagOrder" value="@throws"/>
+            <property name="tagOrder" value="@see"/>
+            <property name="tagOrder" value="@since"/>
+            <property name="tagOrder" value="@deprecated"/>
+        </module>
+        <module name="InvalidJavadocPosition"/>
+        <module name="JavadocContentLocationCheck">
+            <property name="location" value="second_line"/>
+        </module>
+        <module name="JavadocType">
+            <property name="scope" value="public"/>
+        </module>
+        <module name="JavadocTagContinuationIndentation"/>
+        <module name="MissingJavadocMethod">
+            <property name="allowedAnnotations" value="Override"/>
+            <property name="allowedAnnotations" value="Test"/>
+            <property name="scope" value="public"/>
+            <property name="minLineCount" value="2"/>
+        </module>
+        <module name="MissingJavadocType"/>
+        <module name="NonEmptyAtclauseDescription"/>
+        <module name="SingleLineJavadoc">
+            <property name="ignoredTags" value="@inheritDoc"/>
+            <property name="ignoredTags" value="@see"/>
+            <property name="ignoreInlineTags" value="false"/>
+        </module>
+        <module name="SummaryJavadoc"/>
+        <module name="AbbreviationAsWordInName">
+            <property name="ignoreFinal" value="false"/>
+            <property name="allowedAbbreviationLength" value="3"/>
+        </module>
+        <module name="CatchParameterName">
+            <property name="format" value="^[a-z]([a-z0-9][a-zA-Z0-9]*)?$"/>
+        </module>
+        <module name="ClassTypeParameterName">
+            <property name="format" value="^[A-Z][0-9]?$"/>
+        </module>
+        <module name="ConstantName"/>
+        <module name="InterfaceTypeParameterName">
+            <property name="format" value="^[A-Z][0-9]?$"/>
+        </module>
+        <module name="LambdaParameterName">
+            <property name="format" value="^[a-z]([a-z0-9][a-zA-Z0-9]*)?$"/>
+        </module>
+        <module name="LocalVariableName">
+            <property name="format" value="^[a-z]([a-z0-9][a-zA-Z0-9]*)?$"/>
+        </module>
+        <module name="MemberName">
+            <property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9]*$"/>
+        </module>
+        <module name="MethodName">
+            <property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9]*$"/>
+        </module>
+        <module name="MethodTypeParameterName">
+            <property name="format" value="^[A-Z][0-9]?$"/>
+        </module>
+        <module name="PackageName">
+            <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
+        </module>
+        <module name="ParameterName">
+            <property name="format" value="^[a-z]([a-z0-9][a-zA-Z0-9]*)?$"/>
+        </module>
+        <module name="StaticVariableName">
+            <property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9]*$"/>
+        </module>
+        <module name="TypeName">
+            <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
+            <property name="tokens" value="CLASS_DEF"/>
+            <property name="tokens" value="INTERFACE_DEF"/>
+            <property name="tokens" value="ENUM_DEF"/>
+            <property name="tokens" value="ANNOTATION_DEF"/>
+        </module>
+        <module name="AvoidStarImport"/>
+        <module name="CustomImportOrder">
+            <property name="specialImportsRegExp" value="^com\.isador\."/>
+            <property name="sortImportsInGroupAlphabetically" value="true"/>
+            <property name="separateLineBetweenGroups" value="true"/>
+            <property name="customImportOrderRules"
+                      value="STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE###STATIC"/>
+        </module>
+        <module name="IllegalImport"/>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+        <module name="MethodLength">
+            <property name="max" value="330"/>
+        </module>
+        <module name="ParameterNumber">
+            <property name="max" value="7"/>
+        </module>
+        <module name="EmptyForIteratorPad"/>
+        <module name="GenericWhitespace"/>
+        <module name="MethodParamPad"/>
+        <module name="NoWhitespaceAfter">
+            <property name="tokens" value="ARRAY_INIT"/>
+            <property name="tokens" value="AT"/>
+            <property name="tokens" value="INC"/>
+            <property name="tokens" value="DEC"/>
+            <property name="tokens" value="UNARY_MINUS"/>
+            <property name="tokens" value="UNARY_PLUS"/>
+            <property name="tokens" value="BNOT"/>
+            <property name="tokens" value="LNOT"/>
+            <property name="tokens" value="DOT"/>
+            <property name="tokens" value="ARRAY_DECLARATOR"/>
+            <property name="tokens" value="INDEX_OP"/>
+            <property name="tokens" value="METHOD_REF"/>
+        </module>
+        <module name="NoWhitespaceBefore">
+            <property name="allowLineBreaks" value="true"/>
+            <property name="tokens" value="COMMA"/>
+            <property name="tokens" value="SEMI"/>
+            <property name="tokens" value="POST_INC"/>
+            <property name="tokens" value="POST_DEC"/>
+            <property name="tokens" value="DOT"/>
+            <property name="tokens" value="ELLIPSIS"/>
+            <property name="tokens" value="METHOD_REF"/>
+        </module>
+        <module name="OperatorWrap"/>
+        <module name="ParenPad"/>
+        <module name="SeparatorWrap">
+            <property name="id" value="separatorWrapNewLine"/>
+            <property name="tokens" value="DOT"/>
+            <property name="option" value="nl"/>
+        </module>
+        <module name="SeparatorWrap">
+            <property name="id" value="separatorWrapEol"/>
+            <property name="tokens" value="COMMA"/>
+            <property name="tokens" value="ELLIPSIS"/>
+            <property name="tokens" value="ARRAY_DECLARATOR"/>
+            <property name="option" value="eol"/>
+        </module>
+        <module name="TypecastParenPad"/>
+        <module name="WhitespaceAfter">
+            <property name="tokens" value="COMMA"/>
+            <property name="tokens" value="SEMI"/>
+        </module>
+        <module name="WhitespaceAround">
+            <property name="allowEmptyConstructors" value="true"/>
+            <property name="allowEmptyLambdas" value="true"/>
+            <property name="allowEmptyMethods" value="true"/>
+            <property name="allowEmptyTypes" value="true"/>
+            <property name="allowEmptyLoops" value="true"/>
+        </module>
+        <module name="ModifierOrder"/>
+        <module name="RedundantModifier"/>
+        <module name="AvoidNestedBlocks"/>
+        <module name="EmptyBlock"/>
+        <module name="LeftCurly"/>
+        <module name="NeedBraces"/>
+        <module name="RightCurly"/>
+        <module name="EmptyStatement"/>
+        <module name="EqualsHashCode"/>
+        <module name="HiddenField">
+            <property name="ignoreSetter" value="true"/>
+            <property name="ignoreConstructorParameter" value="true"/>
+        </module>
+        <module name="IllegalInstantiation"/>
+        <module name="InnerAssignment"/>
+        <module name="MissingSwitchDefault"/>
+        <module name="SimplifyBooleanExpression"/>
+        <module name="SimplifyBooleanReturn"/>
+        <module name="FinalClass"/>
+        <module name="HideUtilityClassConstructor"/>
+        <module name="InterfaceIsType"/>
+        <module name="ArrayTypeStyle"/>
+        <module name="UpperEll"/>
+        <module name="SuppressWarnings"/>
+        <module name="EmptyCatchBlock">
+            <property name="exceptionVariableName" value="expected"/>
+        </module>
+    </module>
+</module>
