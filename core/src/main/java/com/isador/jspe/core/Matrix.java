@@ -9,15 +9,9 @@ import static java.util.Collections.emptySet;
 /** Матрица соответствия объект - количество. */
 public interface Matrix<T> extends Map<T, Double> {
 
-    /**
-     * Добавить злемент в матрицу с количсеством == 1.0.
-     *
-     * @param t элемент для добавления.
-     *
-     * @throws NullPointerException если добавляемый элемент == null.
-     * @since 1.0.0
-     */
-    Double put(T t);
+    static <T> Matrix<T> emptyMatrix() {
+        return new EmptyMatrix<>();
+    }
 
     /**
      * Изменить колчество элементов в матрице.
@@ -30,19 +24,14 @@ public interface Matrix<T> extends Map<T, Double> {
      * @throws IllegalStateException    если матрица не содержит элемента.
      * @since 1.0.0
      */
-    void setQuantity(T t, double quantity);
+    void setQuantity(T t, Double quantity);
 
     Matrix<T> plus(Matrix<T> matrix);
 
     final class EmptyMatrix<T> implements Matrix<T> {
 
         @Override
-        public Double put(T t) {
-            return null;
-        }
-
-        @Override
-        public void setQuantity(T t, double quantity) {
+        public void setQuantity(T t, Double quantity) {
         }
 
         @Override
@@ -107,9 +96,5 @@ public interface Matrix<T> extends Map<T, Double> {
         public Matrix<T> plus(Matrix<T> matrix) {
             return emptyMatrix();
         }
-    }
-
-    static <T> Matrix<T> emptyMatrix() {
-        return new EmptyMatrix<>();
     }
 }

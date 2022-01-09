@@ -1,5 +1,6 @@
 package com.isador.jspe.core;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
@@ -9,7 +10,13 @@ import static java.util.Objects.requireNonNull;
 /** Полезная нагрузка. */
 public class Payload implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = -5871713422371765004L;
+
+    /** ID нагрузки. */
     private String id;
+
+    /** Название нагрузки. */
     private String title;
 
     public Payload(String id, String title) {
@@ -36,10 +43,6 @@ public class Payload implements Serializable {
      */
     public Payload(String title) {
         this(UUID.randomUUID().toString(), title);
-    }
-
-    public Payload() {
-        this(UUID.randomUUID().toString(), null);
     }
 
     //<editor-fold desc="g\s">

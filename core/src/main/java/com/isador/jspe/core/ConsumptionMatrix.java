@@ -1,15 +1,16 @@
 package com.isador.jspe.core;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
- * Матрица потребления ресурсов полезной нагрузкой (матрица накладных расходов).
- * Представлена в виде таблицы Ресурс - Нагрузка - Количество:
+ * Матрица потребления ресурсов полезной нагрузкой.
+ * Представлена в виде таблицы Нагрузка\Ресурс - Количество:
  *
  * <blockquote>
  *   <table class="striped">
  *     <thead>
- *       <th scope="col" style="text-align:left">Ресурс\Нагрузка</th>
+ *       <th scope="col" style="text-align:left">Нагрузка\Ресурс</th>
  *       <th scope="col" style="text-align:left">Отправка Сообщения</th>
  *       <th scope="col" style="text-align:left">Сохранение в БД</th>
  *       <th scope="col" style="text-align:left">Чтение файла</th>
@@ -39,7 +40,7 @@ import java.util.Collection;
  * <p>
  *     @since 1.0.0
  */
-public interface ConsumptionMatrix {
+public interface ConsumptionMatrix extends Serializable {
 
     /**
      * Потребление ресурса.
@@ -63,15 +64,57 @@ public interface ConsumptionMatrix {
      * @param value    объём потребления.
      *
      * @throws NullPointerException     если объём потребления == null.
-     *                                  Если payload == null.
-     *                                  Если resource == null.
-     * @throws IllegalArgumentException если объём потреблиеня < 1.
+     *                                  Если полезная нагрузка == null.
+     *                                  Если потребляемый ресурс == null.
+     * @throws IllegalArgumentException если объём потребления <= 0.
      * @since 1.0.0
      */
     void setConsumption(Payload payload, Resource resource, Double value);
 
     /**
-     * Удалить потребления ресурса.
+     * Добавить потребление ресурса определенной нагрузкой.
+     *
+     * @param payload          полезная нагрузка.
+     * @param resource         потребляемый ресурс.
+     * @param value            объём потребления.
+     * @param resourceQuantity количество ресурса.
+     *
+     * @throws NullPointerException     если объём потребления == null.
+     *                                  Если полезная нагрузка == null.
+     *                                  Если потребляемый ресурс == null.
+     *                                  Если количество ресурса == null.
+     * @throws IllegalArgumentException если объём потребления <= 0 или если количество ресурса <= 0.
+     * @since 2.0.0
+     */
+    void setConsumption(Payload payload, Resource resource, Double value, Integer resourceQuantity);
+
+    /**
+     * Получить количество ресурса.
+     *
+     * @param resource потребляемый ресурс.
+     *
+     * @return количество потребляемого ресурса, null - если такого ресурса нет в матрице.
+     *
+     * @throws NullPointerException если потребляемый ресурс == null.
+     * @since 2.0.0
+     */
+    Integer getResourceQuantity(Resource resource);
+
+    /**
+     * Изменить количество доступного ресурса. Если ресурса нет в матрице - ничего не произойдёт.
+     *
+     * @param resource потребляемый ресурс.
+     * @param quantity количество ресурса.
+     *
+     * @throws NullPointerException     если потребляемый ресурс == null.
+     *                                  Если количество ресурса == null.
+     * @throws IllegalArgumentException если количество ресурса <= 0.
+     * @since 2.0.0
+     */
+    void setResourceQuantity(Resource resource, Integer quantity);
+
+    /**
+     * Удалить потребление ресурса.
      *
      * @param payload  полезная нагрузка.
      * @param resource потребляемый ресурс.
@@ -85,9 +128,9 @@ public interface ConsumptionMatrix {
      * Возвращает коллекцию ресурсов, на которые замаплена
      * полезная нагрузка.
      *
-     * @param payload полезная нагрузка, для которой надо вернтуть ресурсы.
+     * @param payload полезная нагрузка, для которой надо вернуть ресурсы.
      *
-     * @return коллекция ресурсов. Не может быть null.
+     * @return Коллекция ресурсов. Не может быть null.
      *
      * @since 1.0.0
      */

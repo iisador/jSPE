@@ -39,14 +39,6 @@ class PayloadTest {
     }
 
     @Test
-    void testConstructor() {
-        Payload payload = new Payload();
-
-        assertNotNull(payload.getId(), "Invalid payload id");
-        assertNull(payload.getTitle(), "Invalid payload title");
-    }
-
-    @Test
     void testSetId() {
         Payload payload = new Payload("123", "123");
 

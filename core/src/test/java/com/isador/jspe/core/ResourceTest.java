@@ -43,16 +43,6 @@ class ResourceTest {
     }
 
     @Test
-    void testConstructor() {
-        Resource resource = new Resource();
-
-        assertNotNull(resource.getId(), "Invalid resource id");
-        assertNull(resource.getTitle(), "Invalid resource title");
-        assertNull(resource.getServiceUnit(), "Invalid resource serviceUnit");
-        assertNull(resource.getServiceTime(), "Invalid resource serviceTime");
-    }
-
-    @Test
     void testSetId() {
         Resource resource = new Resource("123", "123");
 
@@ -84,14 +74,14 @@ class ResourceTest {
     void testSetServiceTime() {
         Resource resource = new Resource("123", "123");
 
-        Exception e = assertThrows(IllegalArgumentException.class, () -> resource.setServiceTime(-1L));
+        Exception e = assertThrows(IllegalArgumentException.class, () -> resource.setServiceTime(-1.0));
         assertEquals("Service time should be >= 0", e.getMessage());
 
         resource.setServiceTime(null);
         assertNull(resource.getServiceTime(), "Invalid resource service time");
 
-        resource.setServiceTime(10_000L);
-        assertEquals(10_000, resource.getServiceTime(), "Invalid resource service time");
+        resource.setServiceTime(10.000);
+        assertEquals(10.000, resource.getServiceTime(), "Invalid resource service time");
     }
 
     @Test

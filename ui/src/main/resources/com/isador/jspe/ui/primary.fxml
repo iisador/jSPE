@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<BorderPane id="borderPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isador.jspe.ui.SceneController">
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<BorderPane id="borderPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isador.jspe.ui.SceneController">
     <top>
         <MenuBar id="systemMenu" BorderPane.alignment="CENTER">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" text="Close"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <MenuItem mnemonicParsing="false" text="Delete"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" text="About"/>
                     </items>
                 </Menu>
             </menus>
@@ -28,16 +30,23 @@
     <center>
         <SplitPane dividerPositions="0.5">
             <items>
-                <TabPane id="tabPane" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" tabMaxWidth="100.0" BorderPane.alignment="CENTER">
+                <TabPane id="tabPane" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" tabMaxWidth="100.0"
+                         BorderPane.alignment="CENTER">
                     <tabs>
                         <Tab text="Untitled Tab 1">
                             <content>
-                                <Pane minHeight="0.0" minWidth="0.0" onDragDetected="#onMouseEvent" onMouseClicked="#onMouseEvent" onMouseDragEntered="#onMouseEvent" onMouseDragExited="#onMouseEvent" onMouseDragOver="#onMouseEvent" onMouseDragReleased="#onMouseEvent" onMouseDragged="#onMouseEvent" onMouseEntered="#onMouseEvent" onMouseExited="#onMouseEvent" onMouseMoved="#onMouseEvent" onMousePressed="#onMouseEvent" onMouseReleased="#onMouseEvent" prefHeight="180.0" prefWidth="200.0" />
+                                <Pane minHeight="0.0" minWidth="0.0" onDragDetected="#onMouseEvent"
+                                      onMouseClicked="#onMouseEvent" onMouseDragEntered="#onMouseEvent"
+                                      onMouseDragExited="#onMouseEvent" onMouseDragOver="#onMouseEvent"
+                                      onMouseDragReleased="#onMouseEvent" onMouseDragged="#onMouseEvent"
+                                      onMouseEntered="#onMouseEvent" onMouseExited="#onMouseEvent"
+                                      onMouseMoved="#onMouseEvent" onMousePressed="#onMouseEvent"
+                                      onMouseReleased="#onMouseEvent" prefHeight="180.0" prefWidth="200.0"/>
                             </content>
                         </Tab>
                         <Tab text="Untitled Tab 2">
                             <content>
-                                <Pane />
+                                <Pane/>
                             </content>
                         </Tab>
                     </tabs>
@@ -48,7 +57,7 @@
                             <content>
                                 <AnchorPane>
                                     <children>
-                                        <Label fx:id="label" layoutX="31.0" layoutY="21.0" text="Label" />
+                                        <Label fx:id="label" layoutX="31.0" layoutY="21.0" text="Label"/>
                                     </children>
                                 </AnchorPane>
                             </content>
@@ -56,9 +65,10 @@
                         <TitledPane id="properties" animated="false" collapsible="false" text="Properties">
                             <content>
                                 <AnchorPane>
-                           <children>
-                                        <Label fx:id="label2" layoutX="35.0" layoutY="11.0" text="Label" />
-                           </children></AnchorPane>
+                                    <children>
+                                        <Label fx:id="label2" layoutX="35.0" layoutY="11.0" text="Label"/>
+                                    </children>
+                                </AnchorPane>
                             </content>
                         </TitledPane>
                     </items>

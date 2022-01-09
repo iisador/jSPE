@@ -1,5 +1,6 @@
 package com.isador.jspe.core;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
@@ -8,6 +9,9 @@ import static java.util.Objects.requireNonNull;
 
 /** Ресурс системы. */
 public class Resource implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1700922042818109439L;
 
     /** ID ресурса. */
     private String id;
@@ -19,7 +23,7 @@ public class Resource implements Serializable {
     private String serviceUnit;
 
     /** Время обслуживания. */
-    private Long serviceTime;
+    private Double serviceTime;
 
     /**
      * Создание объекта ресурса.
@@ -57,9 +61,6 @@ public class Resource implements Serializable {
         this(UUID.randomUUID().toString(), title);
     }
 
-    public Resource() {
-        this(UUID.randomUUID().toString(), null);
-    }
     //<editor-fold desc="g\s">
     public String getId() {
         return id;
@@ -110,7 +111,7 @@ public class Resource implements Serializable {
         this.serviceUnit = serviceUnit;
     }
 
-    public Long getServiceTime() {
+    public Double getServiceTime() {
         return serviceTime;
     }
 
@@ -122,8 +123,8 @@ public class Resource implements Serializable {
      * @throws IllegalArgumentException если новое время обслуживания < 0
      * @since 1.0.0
      */
-    public void setServiceTime(Long serviceTime) {
-        if (serviceTime != null && serviceTime < 0) {
+    public void setServiceTime(Double serviceTime) {
+        if (serviceTime != null && Double.compare(serviceTime, 0.0) < 0) {
             throw new IllegalArgumentException("Service time should be >= 0");
         }
         this.serviceTime = serviceTime;
