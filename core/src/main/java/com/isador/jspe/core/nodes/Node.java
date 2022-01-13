@@ -1,9 +1,8 @@
 package com.isador.jspe.core.nodes;
 
 import java.io.Serializable;
+import java.util.Map;
 
-import com.isador.jspe.core.ConsumptionMatrix;
-import com.isador.jspe.core.Matrix;
 import com.isador.jspe.core.Payload;
 
 /**
@@ -36,7 +35,5 @@ public interface Node extends Serializable {
      *
      * @since 1.0.0
      */
-    Matrix<Payload> getPayloadMatrix();
-
-    NodeStatistic getStatistic(ConsumptionMatrix consumptionMatrix);
+    Map<Payload, Double> getPayloadMap();
 }

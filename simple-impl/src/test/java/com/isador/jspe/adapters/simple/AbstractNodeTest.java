@@ -2,8 +2,7 @@ package com.isador.jspe.adapters.simple;
 
 import java.io.Serial;
 
-import com.isador.jspe.adapters.simple.AbstractNode;
-import com.isador.jspe.core.Matrix;
+import com.isador.jspe.adapters.simple.nodes.AbstractNode;
 import com.isador.jspe.core.Payload;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;

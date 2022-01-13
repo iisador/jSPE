@@ -1,7 +1,7 @@
 package com.isador.jspe.core;
 
 /** Интерфейс подсчета статистики по модели. */
-public interface StatisticCalculator<T extends SpeModel<?>> {
+public interface StatisticCalculator<T extends SpeModel> {
 
     /**
      * Вычисление статистики модели.
@@ -12,5 +12,5 @@ public interface StatisticCalculator<T extends SpeModel<?>> {
      *
      * @since 2.0.0
      */
-    ModelStatistic calculateStatistic(T model);
+    ModelStatistic calculate(T model);
 }

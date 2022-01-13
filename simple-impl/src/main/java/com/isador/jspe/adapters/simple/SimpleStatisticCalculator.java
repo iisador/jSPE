@@ -1,9 +1,10 @@
 package com.isador.jspe.adapters.simple;
 
 import java.util.AbstractMap.SimpleEntry;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.isador.jspe.core.ConsumptionMatrix;
-import com.isador.jspe.core.Matrix;
 import com.isador.jspe.core.ModelStatistic;
 import com.isador.jspe.core.Payload;
 import com.isador.jspe.core.Resource;
@@ -12,15 +13,15 @@ import com.isador.jspe.core.StatisticCalculator;
 public class SimpleStatisticCalculator implements StatisticCalculator<SimpleModel> {
 
     @Override
-    public ModelStatistic calculateStatistic(SimpleModel model) {
-        ModelStatistic statistic = new ModelStatistic();
+    public ModelStatistic calculate(SimpleModel model) {
+        SimpleModelStatistic statistic = new SimpleModelStatistic();
 
-        Matrix<Payload> totalPayload = model.getNode()
+        Map<Payload,Double> totalPayload = model.getNode()
                 .orElseThrow(NullPointerException::new)
                 .calculatePayloadMatrix();
         statistic.setTotalPayload(totalPayload);
 
-        Matrix<Resource> totalResource = getResourceMatrix(model.getConsumptionMatrix(), totalPayload);
+        Map<Resource, Double> totalResource = getResourceMatrix(model.getConsumptionMatrix(), totalPayload);
         statistic.setTotalResource(totalResource);
 
         Double rating = totalResource.entrySet().stream()
@@ -32,8 +33,8 @@ public class SimpleStatisticCalculator implements StatisticCalculator<SimpleMode
         return statistic;
     }
 
-    private Matrix<Resource> getResourceMatrix(ConsumptionMatrix consumption, Matrix<Payload> totalPayload) {
-        Matrix<Resource> resourceMatrix = new SimpleMatrix<>();
+    private Map<Resource,Double> getResourceMatrix(ConsumptionMatrix consumption, Map<Payload, Double> totalPayload) {
+        Map<Resource,Double> resourceMatrix = new HashMap<>();
 
         totalPayload.forEach((payload, payloadConsumption) -> consumption.getMappedResources(payload).stream()
                 .map(resource -> new SimpleEntry<>(resource, consumption.getConsumption(payload, resource) * payloadConsumption))

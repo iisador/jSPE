@@ -1,12 +1,15 @@
-package com.isador.jspe.core;
+package com.isador.jspe.adapters.simple;
 
 import java.io.Serial;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import com.isador.jspe.core.MutableConsumptionMatrix;
+import com.isador.jspe.core.Payload;
+import com.isador.jspe.core.Resource;
 
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.toSet;
@@ -16,7 +19,7 @@ import static java.util.stream.Collectors.toSet;
  *
  * @since 1.0.0
  */
-public class SimpleConsumptionMatrix implements ConsumptionMatrix, Serializable {
+public class SimpleConsumptionMatrix implements MutableConsumptionMatrix {
 
     @Serial
     private static final long serialVersionUID = 1764255936895046173L;
@@ -26,20 +29,6 @@ public class SimpleConsumptionMatrix implements ConsumptionMatrix, Serializable 
 
     /** Набор кортежей <Полезная нагрузка - Ресурс - Количество>. */
     private final Set<Tuple<Payload, Resource, Double>> consumption;
-
-    /**
-     * Простая реализация неизменяемого кортежа.
-     *
-     * @since 2.0.0
-     */
-    record Tuple<X, Y, V>(X x, Y y, V v) {
-
-        public Tuple(X x, Y y, V v) {
-            this.x = requireNonNull(x, "X parameter should be not null");
-            this.y = requireNonNull(y, "Y parameter should be not null");
-            this.v = requireNonNull(v, "V parameter should be not null");
-        }
-    }
 
     /**
      * Конструктор по умолчанию создаёт объект, в котором
@@ -54,12 +43,12 @@ public class SimpleConsumptionMatrix implements ConsumptionMatrix, Serializable 
     }
 
     @Override
-    public Double getConsumption(Payload payload, Resource resource) {
+    public double getConsumption(Payload payload, Resource resource) {
         requireNonNull(payload, "payload should be not null");
         requireNonNull(resource, "resource should be not null");
 
         return consumption.stream()
-                .filter(tuple -> tuple.x().equals(payload) && tuple.y().equals(resource))
+                .filter(tuple -> tuple.isXYEquals(payload, resource))
                 .findFirst()
                 .map(Tuple::v)
                 .orElse(0.0);
@@ -74,59 +63,45 @@ public class SimpleConsumptionMatrix implements ConsumptionMatrix, Serializable 
     }
 
     @Override
-    public void setConsumption(Payload payload, Resource resource, Double value) {
-        requireNonNull(payload, "payload should be not null");
-        requireNonNull(resource, "resource should be not null");
-        requireNonNull(value, "value should be not null");
-
-        if (Double.compare(value, 0.0) <= 0) {
-            throw new IllegalArgumentException("value should be > 0.0");
-        }
-
-        consumption.add(new Tuple<>(payload, resource, value));
-        resourceQuantity.putIfAbsent(resource, 1);
+    public void setConsumption(Payload payload, Resource resource, double value) {
+        setConsumption(payload, resource, value, 1);
     }
 
     @Override
-    public void setConsumption(Payload payload, Resource resource, Double value, Integer resourceQuantity) {
+    public void setConsumption(Payload payload, Resource resource, double value, int quantity) {
         requireNonNull(payload, "payload should be not null");
         requireNonNull(resource, "resource should be not null");
-        requireNonNull(value, "value should be not null");
-        requireNonNull(resourceQuantity, "resourceQuantity should be not null");
 
         if (Double.compare(value, 0.0) <= 0) {
             throw new IllegalArgumentException("value should be > 0.0");
         }
 
-        if (resourceQuantity <= 0) {
+        if (quantity <= 0) {
             throw new IllegalArgumentException("resourceQuantity should be > 0.0");
         }
 
         consumption.add(new Tuple<>(payload, resource, value));
-        this.resourceQuantity.put(resource, resourceQuantity);
+        resourceQuantity.put(resource, quantity);
     }
 
     @Override
     public Integer getResourceQuantity(Resource resource) {
         requireNonNull(resource, "resource should be not null");
-
         return resourceQuantity.get(resource);
     }
 
     @Override
-    public void setResourceQuantity(Resource resource, Integer quantity) {
+    public void setResourceQuantity(Resource resource, int quantity) {
         requireNonNull(resource, "resource should be not null");
-
         if (quantity <= 0) {
             throw new IllegalArgumentException("quantity should be > 0.0");
         }
-
         resourceQuantity.put(resource, quantity);
     }
 
     @Override
     public void remove(Payload payload, Resource resource) {
-        consumption.removeIf(tuple -> tuple.x().equals(payload) && tuple.y().equals(resource));
+        consumption.removeIf(tuple -> tuple.isXYEquals(payload, resource));
     }
 
     @Override
@@ -135,5 +110,23 @@ public class SimpleConsumptionMatrix implements ConsumptionMatrix, Serializable 
                "resourceQuantity=" + resourceQuantity +
                ", consumption=" + consumption +
                '}';
+    }
+
+    /**
+     * Простая реализация неизменяемого кортежа.
+     *
+     * @since 2.0.0
+     */
+    record Tuple<X, Y, V>(X x, Y y, V v) {
+
+        public Tuple(X x, Y y, V v) {
+            this.x = requireNonNull(x, "X parameter should be not null");
+            this.y = requireNonNull(y, "Y parameter should be not null");
+            this.v = requireNonNull(v, "V parameter should be not null");
+        }
+
+        public boolean isXYEquals(X x, Y y) {
+            return this.x.equals(x) && this.y.equals(y);
+        }
     }
 }

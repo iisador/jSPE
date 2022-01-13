@@ -1,13 +1,10 @@
 package com.isador.jspe.adapters.simple.nodes;
 
 import java.io.Serial;
+import java.util.Map;
 
-import com.isador.jspe.adapters.simple.AbstractNode;
-import com.isador.jspe.core.ConsumptionMatrix;
-import com.isador.jspe.core.Matrix;
 import com.isador.jspe.core.Payload;
 import com.isador.jspe.core.nodes.BasicNode;
-import com.isador.jspe.core.nodes.NodeStatistic;
 
 /**
  * Реализация Basic node.
@@ -31,21 +28,7 @@ public final class SimpleBasicNode extends AbstractNode implements BasicNode {
      * @since 1.0.0
      */
     @Override
-    public Matrix<Payload> calculatePayloadMatrix() {
-        if (childList.isEmpty()) {
-            return payloadMatrix;
-        }
-        return payloadMatrix.plus(childList.get(0).calculatePayloadMatrix());
-    }
-
-    @Override
-    public NodeStatistic getStatistic(ConsumptionMatrix consumptionMatrix) {
-        Matrix<Payload> calculatedPayload;
-        if (childList.isEmpty()) {
-            calculatedPayload = payloadMatrix;
-        } else {
-            calculatedPayload = payloadMatrix.plus(childList.get(0).calculatePayloadMatrix());
-        }
-        return null;
+    public Map<Payload, Double> calculatePayloadMatrix() {
+        return next == null ? payloadMap : plus(payloadMap, next.calculatePayloadMatrix());
     }
 }

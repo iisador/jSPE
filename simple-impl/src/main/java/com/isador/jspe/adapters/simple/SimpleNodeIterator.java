@@ -4,10 +4,14 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 import java.util.Queue;
+
+import com.isador.jspe.adapters.simple.nodes.AbstractCompoundNode;
+import com.isador.jspe.adapters.simple.nodes.AbstractNode;
+import com.isador.jspe.core.NodeIterator;
+import com.isador.jspe.core.SpeModel;
+import com.isador.jspe.core.nodes.CompoundNode;
 
 import static java.util.Objects.requireNonNull;
 
@@ -18,7 +22,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @since 1.0.0
  */
-public class NodesIterator implements Iterator<AbstractNode> {
+public class SimpleNodeIterator implements NodeIterator {
 
     /** Очередь потомков. */
     private final Queue<AbstractNode> queue;
@@ -26,8 +30,7 @@ public class NodesIterator implements Iterator<AbstractNode> {
     /** Коллекция помеченных узлов. */
     private final Collection<String> markedNodes;
 
-    /** Узел с циклической связью. */
-    private AbstractNode cyclicNode;
+    private final SpeModel speModel;
 
     /**
      * Конструктор для создания итератора.
@@ -37,8 +40,9 @@ public class NodesIterator implements Iterator<AbstractNode> {
      * @throws NullPointerException если node == null.
      * @since 1.0.0
      */
-    public NodesIterator(final AbstractNode node) {
+    public SimpleNodeIterator(final AbstractNode node, final SpeModel speModel) {
         requireNonNull(node, "Node should be not null");
+        this.speModel = requireNonNull(speModel, "SpeModel should be not null");
 
         markedNodes = new HashSet<>();
         queue = new ArrayDeque<>();
@@ -57,28 +61,19 @@ public class NodesIterator implements Iterator<AbstractNode> {
         AbstractNode node = queue.poll();
         if (node != null) {
             markedNodes.add(node.getId());
-            List<AbstractNode> unmarkedNodes = new ArrayList<>(node.getChildList());
-            Iterator<AbstractNode> it = unmarkedNodes.iterator();
-            while (it.hasNext()) {
-                var n = it.next();
-                if (markedNodes.contains(n.getId())) {
-                    cyclicNode = n;
-                    it.remove();
-                }
+            List<AbstractNode> unmarkedNodes = new ArrayList<>();
+            unmarkedNodes.add(node.getNext());
+            if(node instanceof AbstractCompoundNode) {
+                unmarkedNodes.addAll(node.getChilds());
             }
+            unmarkedNodes.removeIf(n -> markedNodes.contains(n.getId()));
             queue.addAll(unmarkedNodes);
         }
         return node;
     }
 
-    /**
-     * Вернёт узел с циклической зависимостью.
-     *
-     * @return узел, найденный при обходе.
-     *
-     * @since 1.0.0
-     */
-    public Optional<AbstractNode> getCyclicNode() {
-        return Optional.ofNullable(cyclicNode);
+    @Override
+    public SpeModel getModel() {
+        return speModel;
     }
 }

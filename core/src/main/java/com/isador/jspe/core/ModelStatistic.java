@@ -1,65 +1,20 @@
 package com.isador.jspe.core;
 
+import java.util.Map;
+
 /**
  * Статистика модели.
  * Содержит основные данные о модели и её оценку.
  */
-public class ModelStatistic {
+public interface ModelStatistic {
 
-    /** Общее количество полезной нагрузки. */
-    private Matrix<Payload> totalPayload;
+    Map<Payload, Double> getTotalPayload();
 
-    /** Общее количество потребляемых ресурсов. */
-    private Matrix<Resource> totalResource;
+    Map<Resource, Double> getTotalResource();
 
-    /** Максимальный путь. */
-    private ModelPath maxPath;
+    ModelPath getMaxPath();
 
-    /** Минимальный путь. */
-    private ModelPath minPath;
+    ModelPath getMinPath();
 
-    /** Оценка модели. */
-    private Double rating;
-
-    //<editor-fold desc="g\s">
-    public Matrix<Payload> getTotalPayload() {
-        return totalPayload;
-    }
-
-    public void setTotalPayload(Matrix<Payload> totalPayload) {
-        this.totalPayload = totalPayload;
-    }
-
-    public Matrix<Resource> getTotalResource() {
-        return totalResource;
-    }
-
-    public void setTotalResource(Matrix<Resource> totalResource) {
-        this.totalResource = totalResource;
-    }
-
-    public ModelPath getMaxPath() {
-        return maxPath;
-    }
-
-    public void setMaxPath(ModelPath maxPath) {
-        this.maxPath = maxPath;
-    }
-
-    public ModelPath getMinPath() {
-        return minPath;
-    }
-
-    public void setMinPath(ModelPath minPath) {
-        this.minPath = minPath;
-    }
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
-    //</editor-fold>
+    double getRating();
 }

@@ -5,53 +5,32 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
+import com.isador.jspe.adapters.simple.nodes.AbstractNode;
 import com.isador.jspe.core.ConsumptionMatrix;
-import com.isador.jspe.core.InvalidModelException;
 import com.isador.jspe.core.SpeModel;
-import com.isador.jspe.core.ModelStatistic;
-import com.isador.jspe.core.SimpleConsumptionMatrix;
-import com.isador.jspe.core.StatisticCalculator;
+import com.isador.jspe.core.nodes.Node;
 
-public class SimpleModel implements SpeModel<AbstractNode> {
+public class SimpleModel implements SpeModel {
 
     @Serial
     private static final long serialVersionUID = -7230677770877873149L;
 
-    private AbstractNode rootNode;
-    private final ConsumptionMatrix consumptionMatrix;
-    private final StatisticCalculator<SimpleModel> statisticCalculator;
-
-    public SimpleModel() {
-        consumptionMatrix = new SimpleConsumptionMatrix();
-        statisticCalculator = new SimpleStatisticCalculator();
-    }
+    private AbstractNode node;
+    private ConsumptionMatrix consumptionMatrix;
 
     @Override
-    public Optional<AbstractNode> getNode(String id) {
+    public Optional<? extends Node> getNode(String id) {
         return StreamSupport.stream(spliterator(), false)
                 .filter(node -> node.getId().equals(id))
                 .findFirst();
     }
 
-    @Override
-    public void addNode(AbstractNode node) {
-        rootNode = node;
-    }
-
-    @Override
-    public void addNode(AbstractNode parent, AbstractNode child) {
-        getNode(parent.getId())
-                .ifPresent(n -> n.addChild(child));
-    }
-
-    @Override
     public Optional<AbstractNode> getNode() {
-        return Optional.ofNullable(rootNode);
+        return Optional.ofNullable(node);
     }
 
-    @Override
-    public boolean isEmpty() {
-        return rootNode == null;
+    public void setNode(AbstractNode node) {
+        this.node = node;
     }
 
     @Override
@@ -59,21 +38,12 @@ public class SimpleModel implements SpeModel<AbstractNode> {
         return consumptionMatrix;
     }
 
-    @Override
-    public ModelStatistic getStatistic() {
-        return statisticCalculator.calculateStatistic(this);
+    public void setConsumptionMatrix(ConsumptionMatrix consumptionMatrix) {
+        this.consumptionMatrix = consumptionMatrix;
     }
 
     @Override
-    public void validate() throws InvalidModelException {
-//        new NodesIterator(rootNode).getCyclicNode()
-//                .ifPresent(n -> {
-//                    throw new InvalidModelException(n, "Model has cyclic dependencies");
-//                });
-    }
-
-    @Override
-    public Iterator<AbstractNode> iterator() {
-        return new NodesIterator(rootNode);
+    public Iterator<Node> iterator() {
+        return new SimpleNodeIterator(node, this);
     }
 }

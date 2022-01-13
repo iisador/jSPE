@@ -1,19 +1,21 @@
-package com.isador.jspe.adapters.simple;
+package com.isador.jspe.adapters.simple.nodes;
 
 import java.io.Serial;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
-import com.isador.jspe.core.ConsumptionMatrix;
-import com.isador.jspe.core.Matrix;
 import com.isador.jspe.core.Payload;
 import com.isador.jspe.core.nodes.Node;
-import com.isador.jspe.core.nodes.NodeStatistic;
 
+import static java.util.Collections.emptyMap;
 import static java.util.Objects.requireNonNull;
+import static java.util.stream.Collectors.toMap;
 
 /**
  * Общий класс для всех стандартных узлов модели.
@@ -22,17 +24,13 @@ import static java.util.Objects.requireNonNull;
  *
  * @since 1.0.0
  */
-public abstract class AbstractNode implements Node, Iterable<AbstractNode> {
+public abstract class AbstractNode implements Node {
 
     @Serial
     private static final long serialVersionUID = 417153637595528688L;
-
-    /** Список потомков. */
-    protected final List<AbstractNode> childList;
-
     /** Матрица потребления. */
-    protected final Matrix<Payload> payloadMatrix;
-
+    protected final Map<Payload, Double> payloadMap;
+    protected AbstractNode next;
     /** ID узла. */
     protected String id;
 
@@ -58,9 +56,7 @@ public abstract class AbstractNode implements Node, Iterable<AbstractNode> {
             throw new IllegalArgumentException("title should be not blank");
         }
         this.title = title;
-
-        childList = new ArrayList<>();
-        payloadMatrix = new SimpleMatrix<>();
+        payloadMap = new HashMap<>();
     }
 
     /**
@@ -85,28 +81,6 @@ public abstract class AbstractNode implements Node, Iterable<AbstractNode> {
      */
     public AbstractNode() {
         this(UUID.randomUUID().toString(), null);
-    }
-
-    void addChild(AbstractNode node) {
-        requireNonNull(node, "Child node should be not null");
-
-        childList.add(node);
-    }
-
-    /**
-     * Итератор потомков.
-     *
-     * @return итератор, проходящий всех потомков рекурсивно.
-     *
-     * @since 1.0.0
-     */
-    @Override
-    public Iterator<AbstractNode> iterator() {
-        return new NodesIterator(this);
-    }
-
-    List<? extends AbstractNode> getChildList() {
-        return childList;
     }
 
     @Override
@@ -139,8 +113,8 @@ public abstract class AbstractNode implements Node, Iterable<AbstractNode> {
     }
 
     @Override
-    public Matrix<Payload> getPayloadMatrix() {
-        return payloadMatrix;
+    public Map<Payload, Double> getPayloadMap() {
+        return payloadMap;
     }
 
     /**
@@ -150,12 +124,26 @@ public abstract class AbstractNode implements Node, Iterable<AbstractNode> {
      *
      * @since 1.0.0
      */
-    public abstract Matrix<Payload> calculatePayloadMatrix();
+    public Map<Payload, Double> calculatePayloadMatrix() {
+        return emptyMap();
+    }
 
+    protected Map<Payload, Double> plus(Map<Payload, Double> m1, Map<Payload, Double> m2) {
+        Set<Payload> payloads = new HashSet<>();
+        payloads.addAll(m1.keySet());
+        payloads.addAll(m2.keySet());
 
-    @Override
-    public NodeStatistic getStatistic(ConsumptionMatrix consumptionMatrix) {
-        return null;
+        return payloads.stream()
+                .map(p -> new AbstractMap.SimpleEntry<>(p, m1.getOrDefault(p, 0.0) + m2.getOrDefault(p, 0.0)))
+                .collect(toMap(Entry::getKey, Entry::getValue));
+    }
+
+    public AbstractNode getNext() {
+        return next;
+    }
+
+    public void setNext(AbstractNode next) {
+        this.next = next;
     }
 
     @Override

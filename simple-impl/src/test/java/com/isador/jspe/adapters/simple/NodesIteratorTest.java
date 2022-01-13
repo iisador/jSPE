@@ -1,5 +1,6 @@
 package com.isador.jspe.adapters.simple;
 
+import com.isador.jspe.adapters.simple.nodes.AbstractNode;
 import com.isador.jspe.adapters.simple.nodes.TestNode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
