@@ -1,46 +1,49 @@
 package com.isador.jspe.adapters.simple;
 
+import java.util.Optional;
+
+import com.isador.jspe.adapters.simple.nodes.AbstractNode;
 import com.isador.jspe.core.ModelBuilder;
 import com.isador.jspe.core.MutableConsumptionMatrix;
-import com.isador.jspe.core.SpeModel;
-import com.isador.jspe.core.nodes.Node;
-import com.isador.jspe.core.nodes.NodeBuilder;
 
-public class SimpleModelBuilder implements ModelBuilder {
+public class modelBuilder implements ModelBuilder<AbstractNode> {
 
-    private SimpleModel model;
+    private final SimpleModel model;
+    private final SimpleConsumptionMatrix consumptionMatrix;
 
-    public SimpleModelBuilder() {
+    public modelBuilder() {
         model = new SimpleModel();
+        consumptionMatrix = new SimpleConsumptionMatrix();
+        model.setConsumptionMatrix(consumptionMatrix);
     }
 
     @Override
-    public SpeModel build() {
+    public SimpleModel build() {
         return model;
     }
 
     @Override
-    public void add(Node node) {
-
+    public void add(AbstractNode node) {
+        model.setNode(node);
     }
 
     @Override
-    public void add(Node node, Node parent) {
-
+    public void add(String nodeId, AbstractNode child) {
+        model.getNode(nodeId).ifPresent(n -> n.setNext(child));
     }
 
     @Override
-    public Node getNode(String id) {
-        return null;
+    public Optional<AbstractNode> getNode(String id) {
+        return model.getNode(id);
     }
 
     @Override
-    public NodeBuilder getNodeBuilder() {
-        return null;
+    public SimpleNodeBuilder getNodeBuilder() {
+        return new SimpleNodeBuilder();
     }
 
     @Override
     public MutableConsumptionMatrix getConsumptionMatrix() {
-        return null;
+        return consumptionMatrix;
     }
 }

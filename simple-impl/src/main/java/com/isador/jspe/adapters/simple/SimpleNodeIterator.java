@@ -10,8 +10,6 @@ import java.util.Queue;
 import com.isador.jspe.adapters.simple.nodes.AbstractCompoundNode;
 import com.isador.jspe.adapters.simple.nodes.AbstractNode;
 import com.isador.jspe.core.NodeIterator;
-import com.isador.jspe.core.SpeModel;
-import com.isador.jspe.core.nodes.CompoundNode;
 
 import static java.util.Objects.requireNonNull;
 
@@ -22,7 +20,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @since 1.0.0
  */
-public class SimpleNodeIterator implements NodeIterator {
+public class SimpleNodeIterator implements NodeIterator<AbstractNode> {
 
     /** Очередь потомков. */
     private final Queue<AbstractNode> queue;
@@ -30,7 +28,7 @@ public class SimpleNodeIterator implements NodeIterator {
     /** Коллекция помеченных узлов. */
     private final Collection<String> markedNodes;
 
-    private final SpeModel speModel;
+    private final SimpleModel simpleModel;
 
     /**
      * Конструктор для создания итератора.
@@ -40,9 +38,9 @@ public class SimpleNodeIterator implements NodeIterator {
      * @throws NullPointerException если node == null.
      * @since 1.0.0
      */
-    public SimpleNodeIterator(final AbstractNode node, final SpeModel speModel) {
+    public SimpleNodeIterator(final AbstractNode node, final SimpleModel simpleModel) {
         requireNonNull(node, "Node should be not null");
-        this.speModel = requireNonNull(speModel, "SpeModel should be not null");
+        this.simpleModel = requireNonNull(simpleModel, "SimpleModel should be not null");
 
         markedNodes = new HashSet<>();
         queue = new ArrayDeque<>();
@@ -64,7 +62,7 @@ public class SimpleNodeIterator implements NodeIterator {
             List<AbstractNode> unmarkedNodes = new ArrayList<>();
             unmarkedNodes.add(node.getNext());
             if(node instanceof AbstractCompoundNode) {
-                unmarkedNodes.addAll(node.getChilds());
+                unmarkedNodes.addAll(((AbstractCompoundNode) node).getChilds());
             }
             unmarkedNodes.removeIf(n -> markedNodes.contains(n.getId()));
             queue.addAll(unmarkedNodes);
@@ -73,7 +71,7 @@ public class SimpleNodeIterator implements NodeIterator {
     }
 
     @Override
-    public SpeModel getModel() {
-        return speModel;
+    public SimpleModel getModel() {
+        return simpleModel;
     }
 }

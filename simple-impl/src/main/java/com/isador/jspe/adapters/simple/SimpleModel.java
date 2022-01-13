@@ -10,7 +10,7 @@ import com.isador.jspe.core.ConsumptionMatrix;
 import com.isador.jspe.core.SpeModel;
 import com.isador.jspe.core.nodes.Node;
 
-public class SimpleModel implements SpeModel {
+public class SimpleModel implements SpeModel<AbstractNode> {
 
     @Serial
     private static final long serialVersionUID = -7230677770877873149L;
@@ -19,7 +19,7 @@ public class SimpleModel implements SpeModel {
     private ConsumptionMatrix consumptionMatrix;
 
     @Override
-    public Optional<? extends Node> getNode(String id) {
+    public Optional<AbstractNode> getNode(String id) {
         return StreamSupport.stream(spliterator(), false)
                 .filter(node -> node.getId().equals(id))
                 .findFirst();
@@ -43,7 +43,7 @@ public class SimpleModel implements SpeModel {
     }
 
     @Override
-    public Iterator<Node> iterator() {
+    public SimpleNodeIterator iterator() {
         return new SimpleNodeIterator(node, this);
     }
 }

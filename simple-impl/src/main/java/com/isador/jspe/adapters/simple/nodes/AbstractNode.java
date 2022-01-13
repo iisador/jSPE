@@ -30,7 +30,10 @@ public abstract class AbstractNode implements Node {
     private static final long serialVersionUID = 417153637595528688L;
     /** Матрица потребления. */
     protected final Map<Payload, Double> payloadMap;
+
+    /** Следующий узел модели. */
     protected AbstractNode next;
+
     /** ID узла. */
     protected String id;
 

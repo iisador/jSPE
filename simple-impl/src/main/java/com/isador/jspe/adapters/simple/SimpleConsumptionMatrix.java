@@ -27,7 +27,7 @@ public class SimpleConsumptionMatrix implements MutableConsumptionMatrix {
     /** Количество ресурса. */
     private final Map<Resource, Integer> resourceQuantity;
 
-    /** Набор кортежей <Полезная нагрузка - Ресурс - Количество>. */
+    /** Набор кортежей &ltПолезная нагрузка - Ресурс - Количество&gt&#8228 */
     private final Set<Tuple<Payload, Resource, Double>> consumption;
 
     /**

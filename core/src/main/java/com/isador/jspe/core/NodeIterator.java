@@ -8,7 +8,7 @@ import com.isador.jspe.core.nodes.Node;
  * Итератор по узлам модели.
  * Порядок узлов зависит от реализации.
  */
-public interface NodeIterator extends Iterator<Node> {
+public interface NodeIterator<T extends Node> extends Iterator<T> {
 
     /**
      * Модель, по узлам которой осуществляется итерация.
@@ -17,5 +17,5 @@ public interface NodeIterator extends Iterator<Node> {
      *
      * @since 2.0.0
      */
-    SpeModel getModel();
+    SpeModel<T> getModel();
 }

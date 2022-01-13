@@ -9,21 +9,21 @@ import com.isador.jspe.core.SpeModel;
 /**
  * @since 2.0.0
  */
-public interface NodeBuilder {
+public interface NodeBuilder<T extends Node> {
 
-    Node build();
+    T build();
 
-    void addCase(Node child, double probability);
+    void addCase(T child, double probability);
 
-    void removeCase(Node child);
+    void removeCase(T child);
 
-    void setModel(SpeModel model);
+    void setModel(SpeModel<T> model);
 
     void removeModel();
 
-    void addStep(Node child);
+    void addStep(T child);
 
-    void removeStep(Node child);
+    void removeStep(T child);
 
     void setRepeatCount(int count);
 

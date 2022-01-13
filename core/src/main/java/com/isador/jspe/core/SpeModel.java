@@ -10,7 +10,7 @@ import com.isador.jspe.core.nodes.Node;
  *
  * @since 1.0.0
  */
-public interface SpeModel extends Serializable, Iterable<Node> {
+public interface SpeModel<T extends Node> extends Serializable, Iterable<T> {
 
     /**
      * Получить узел модели.
@@ -21,7 +21,7 @@ public interface SpeModel extends Serializable, Iterable<Node> {
      *
      * @since 1.0.0
      */
-    Optional<? extends Node> getNode(String id);
+    Optional<T> getNode(String id);
 
     /**
      * Матрица потребления ресурсов модели.

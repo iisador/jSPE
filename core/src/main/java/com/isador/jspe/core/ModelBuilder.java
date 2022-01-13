@@ -1,23 +1,25 @@
 package com.isador.jspe.core;
 
 
+import java.util.Optional;
+
 import com.isador.jspe.core.nodes.Node;
 import com.isador.jspe.core.nodes.NodeBuilder;
 
 /**
  * @since 2.0.0
  */
-public interface ModelBuilder {
+public interface ModelBuilder<T extends Node> {
 
-    SpeModel build();
+    SpeModel<T> build();
 
-    void add(Node node);
+    void add(T node);
 
-    void add(Node node, Node parent);
+    void add(String nodeId, T child);
 
-    Node getNode(String id);
+    Optional<T> getNode(String id);
 
-    NodeBuilder getNodeBuilder();
+    NodeBuilder<T> getNodeBuilder();
 
     MutableConsumptionMatrix getConsumptionMatrix();
 }
