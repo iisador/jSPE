@@ -13,29 +13,27 @@ public interface NodeBuilder<T extends Node> {
 
     T build();
 
-    void addCase(T child, double probability);
+    NodeBuilder<T> addCase(T step, double probability);
 
-    void removeCase(T child);
+    NodeBuilder<T> removeCase(T step);
 
-    void setModel(SpeModel<T> model);
+    NodeBuilder<T> setModel(SpeModel<T> model);
 
-    void removeModel();
+    NodeBuilder<T> removeModel();
 
-    void addStep(T child);
+    NodeBuilder<T> addStep(T step);
 
-    void removeStep(T child);
+    NodeBuilder<T> removeStep(T step);
 
-    void setRepeatCount(int count);
+    NodeBuilder<T> setRepeatCount(int count);
 
-    void removeRepeatCount();
+    NodeBuilder<T> removeRepeatCount();
 
-    void setId(String id);
+    NodeBuilder<T> setId(String id);
 
-    void setTitle(String title);
+    NodeBuilder<T> setTitle(String title);
 
-    void setPayload(Map<Payload, Double> payload);
+    NodeBuilder<T> addPayload(Payload payload, double value);
 
-    Map<Payload, Double> addPayload(Payload payload, double value);
-
-    void removePayload(Payload payload);
+    NodeBuilder<T> removePayload(Payload payload);
 }

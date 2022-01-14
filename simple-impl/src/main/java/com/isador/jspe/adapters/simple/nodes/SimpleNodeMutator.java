@@ -1,17 +1,17 @@
-package com.isador.jspe.adapters.simple;
+package com.isador.jspe.adapters.simple.nodes;
 
 import java.util.Map;
 
-import com.isador.jspe.adapters.simple.nodes.AbstractNode;
 import com.isador.jspe.core.Payload;
 import com.isador.jspe.core.SpeModel;
-import com.isador.jspe.core.nodes.NodeBuilder;
+import com.isador.jspe.core.nodes.NodeMutator;
 
-public class SimpleNodeBuilder implements NodeBuilder<AbstractNode> {
+public class SimpleNodeMutator implements NodeMutator<AbstractNode> {
 
-    @Override
-    public AbstractNode build() {
-        return null;
+    private final AbstractNode node;
+
+    public SimpleNodeMutator(AbstractNode node) {
+        this.node = node;
     }
 
     @Override
@@ -65,13 +65,13 @@ public class SimpleNodeBuilder implements NodeBuilder<AbstractNode> {
     }
 
     @Override
-    public void setPayload(Map<Payload, Double> payload) {
+    public void addPayload(Map<Payload, Double> payload) {
 
     }
 
     @Override
-    public Map<Payload, Double> addPayload(Payload payload, double value) {
-        return null;
+    public void addPayload(Payload payload, double value) {
+
     }
 
     @Override

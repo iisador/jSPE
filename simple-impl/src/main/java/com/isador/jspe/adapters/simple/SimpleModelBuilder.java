@@ -3,15 +3,17 @@ package com.isador.jspe.adapters.simple;
 import java.util.Optional;
 
 import com.isador.jspe.adapters.simple.nodes.AbstractNode;
+import com.isador.jspe.adapters.simple.nodes.SimpleNodeBuilder;
 import com.isador.jspe.core.ModelBuilder;
 import com.isador.jspe.core.MutableConsumptionMatrix;
+import com.isador.jspe.core.nodes.NodeMutator;
 
-public class modelBuilder implements ModelBuilder<AbstractNode> {
+public class SimpleModelBuilder implements ModelBuilder<AbstractNode> {
 
     private final SimpleModel model;
     private final SimpleConsumptionMatrix consumptionMatrix;
 
-    public modelBuilder() {
+    public SimpleModelBuilder() {
         model = new SimpleModel();
         consumptionMatrix = new SimpleConsumptionMatrix();
         model.setConsumptionMatrix(consumptionMatrix);
@@ -40,6 +42,11 @@ public class modelBuilder implements ModelBuilder<AbstractNode> {
     @Override
     public SimpleNodeBuilder getNodeBuilder() {
         return new SimpleNodeBuilder();
+    }
+
+    @Override
+    public NodeMutator<AbstractNode> getNodeMutator(String id) {
+        return null;
     }
 
     @Override
