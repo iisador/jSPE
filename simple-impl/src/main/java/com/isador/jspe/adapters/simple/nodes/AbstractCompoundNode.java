@@ -11,32 +11,32 @@ public abstract class AbstractCompoundNode extends AbstractNode {
     @Serial
     private static final long serialVersionUID = -4308360272398863165L;
 
-    protected final List<AbstractNode> childs;
+    protected final List<AbstractNode> childList;
 
     public AbstractCompoundNode(String id, String title) {
         super(id, title);
-        this.childs = new ArrayList<>();
+        this.childList = new ArrayList<>();
     }
 
     public AbstractCompoundNode(String title) {
         super(title);
-        this.childs = new ArrayList<>();
+        this.childList = new ArrayList<>();
     }
 
     public AbstractCompoundNode() {
-        this.childs = new ArrayList<>();
+        this.childList = new ArrayList<>();
     }
 
     public void addChild(AbstractNode child) {
         requireNonNull(child, "child should be not null");
-        childs.add(child);
+        childList.add(child);
     }
 
     public void removeChild(AbstractNode child) {
-        childs.remove(child);
+        childList.remove(child);
     }
 
-    public List<AbstractNode> getChilds() {
-        return childs;
+    public List<AbstractNode> getChildList() {
+        return childList;
     }
 }

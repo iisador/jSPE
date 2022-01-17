@@ -2,9 +2,7 @@ package com.isador.jspe.adapters.simple.nodes;
 
 import java.io.Serial;
 
-import com.isador.jspe.core.nodes.PardoNode;
-
-public final class SimplePardoNode extends AbstractCompoundNode implements PardoNode {
+public final class PardoNode extends AbstractCompoundNode {
 
     @Serial
     private static final long serialVersionUID = 2081226841334674189L;

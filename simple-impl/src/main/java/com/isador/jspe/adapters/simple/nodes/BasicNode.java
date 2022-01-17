@@ -3,8 +3,7 @@ package com.isador.jspe.adapters.simple.nodes;
 import java.io.Serial;
 import java.util.Map;
 
-import com.isador.jspe.core.Payload;
-import com.isador.jspe.core.nodes.BasicNode;
+import com.isador.jspe.adapters.simple.Payload;
 
 /**
  * Реализация Basic node.
@@ -14,7 +13,7 @@ import com.isador.jspe.core.nodes.BasicNode;
  *
  * @since 1.0.0
  */
-public final class SimpleBasicNode extends AbstractNode implements BasicNode {
+public final class BasicNode extends AbstractNode {
 
     @Serial
     private static final long serialVersionUID = 2601070160872670175L;

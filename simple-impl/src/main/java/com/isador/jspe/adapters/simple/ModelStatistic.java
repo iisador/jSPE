@@ -1,13 +1,9 @@
 package com.isador.jspe.adapters.simple;
 
+import java.io.Serializable;
 import java.util.Map;
 
-import com.isador.jspe.core.ModelPath;
-import com.isador.jspe.core.ModelStatistic;
-import com.isador.jspe.core.Payload;
-import com.isador.jspe.core.Resource;
-
-public class SimpleModelStatistic implements ModelStatistic {
+public class ModelStatistic implements Serializable {
 
     private Map<Payload, Double> totalPayload;
     private Map<Resource, Double> totalResource;
@@ -15,7 +11,6 @@ public class SimpleModelStatistic implements ModelStatistic {
     private ModelPath minPath;
     private double rating;
 
-    @Override
     public Map<Payload, Double> getTotalPayload() {
         return totalPayload;
     }
@@ -24,7 +19,6 @@ public class SimpleModelStatistic implements ModelStatistic {
         this.totalPayload = totalPayload;
     }
 
-    @Override
     public Map<Resource, Double> getTotalResource() {
         return totalResource;
     }
@@ -33,7 +27,6 @@ public class SimpleModelStatistic implements ModelStatistic {
         this.totalResource = totalResource;
     }
 
-    @Override
     public ModelPath getMaxPath() {
         return maxPath;
     }
@@ -42,7 +35,6 @@ public class SimpleModelStatistic implements ModelStatistic {
         this.maxPath = maxPath;
     }
 
-    @Override
     public ModelPath getMinPath() {
         return minPath;
     }
@@ -51,7 +43,6 @@ public class SimpleModelStatistic implements ModelStatistic {
         this.minPath = minPath;
     }
 
-    @Override
     public double getRating() {
         return rating;
     }

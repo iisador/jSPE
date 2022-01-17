@@ -1,6 +1,7 @@
 package com.isador.jspe.adapters.simple.nodes;
 
 import java.io.Serial;
+import java.io.Serializable;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,8 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-import com.isador.jspe.core.Payload;
-import com.isador.jspe.core.nodes.Node;
+import com.isador.jspe.adapters.simple.Payload;
 
 import static java.util.Collections.emptyMap;
 import static java.util.Objects.requireNonNull;
@@ -24,10 +24,11 @@ import static java.util.stream.Collectors.toMap;
  *
  * @since 1.0.0
  */
-public abstract class AbstractNode implements Node {
+public abstract class AbstractNode implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 417153637595528688L;
+
     /** Матрица потребления. */
     protected final Map<Payload, Double> payloadMap;
 
@@ -86,7 +87,6 @@ public abstract class AbstractNode implements Node {
         this(UUID.randomUUID().toString(), null);
     }
 
-    @Override
     public String getId() {
         return id;
     }
@@ -103,7 +103,6 @@ public abstract class AbstractNode implements Node {
         this.id = requireNonNull(id, "id should be not null");
     }
 
-    @Override
     public String getTitle() {
         return title;
     }
@@ -115,7 +114,6 @@ public abstract class AbstractNode implements Node {
         this.title = title;
     }
 
-    @Override
     public Map<Payload, Double> getPayloadMap() {
         return payloadMap;
     }
