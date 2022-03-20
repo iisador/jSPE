@@ -1,15 +1,12 @@
 package com.isador.jspe.adapters.simple;
 
 import java.io.Serial;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import com.isador.jspe.core.MutableConsumptionMatrix;
-import com.isador.jspe.core.Payload;
-import com.isador.jspe.core.Resource;
 
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.toSet;
@@ -19,7 +16,7 @@ import static java.util.stream.Collectors.toSet;
  *
  * @since 1.0.0
  */
-public class SimpleConsumptionMatrix implements MutableConsumptionMatrix {
+public class ConsumptionMatrix implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1764255936895046173L;
@@ -37,12 +34,11 @@ public class SimpleConsumptionMatrix implements MutableConsumptionMatrix {
      *
      * @since 2.0.0
      */
-    public SimpleConsumptionMatrix() {
+    public ConsumptionMatrix() {
         consumption = new HashSet<>();
         resourceQuantity = new HashMap<>();
     }
 
-    @Override
     public double getConsumption(Payload payload, Resource resource) {
         requireNonNull(payload, "payload should be not null");
         requireNonNull(resource, "resource should be not null");
@@ -54,7 +50,6 @@ public class SimpleConsumptionMatrix implements MutableConsumptionMatrix {
                 .orElse(0.0);
     }
 
-    @Override
     public Collection<Resource> getMappedResources(Payload payload) {
         return consumption.stream()
                 .filter(tuple -> tuple.x().equals(payload))
@@ -62,12 +57,10 @@ public class SimpleConsumptionMatrix implements MutableConsumptionMatrix {
                 .collect(toSet());
     }
 
-    @Override
     public void setConsumption(Payload payload, Resource resource, double value) {
         setConsumption(payload, resource, value, 1);
     }
 
-    @Override
     public void setConsumption(Payload payload, Resource resource, double value, int quantity) {
         requireNonNull(payload, "payload should be not null");
         requireNonNull(resource, "resource should be not null");
@@ -84,13 +77,11 @@ public class SimpleConsumptionMatrix implements MutableConsumptionMatrix {
         resourceQuantity.put(resource, quantity);
     }
 
-    @Override
     public Integer getResourceQuantity(Resource resource) {
         requireNonNull(resource, "resource should be not null");
         return resourceQuantity.get(resource);
     }
 
-    @Override
     public void setResourceQuantity(Resource resource, int quantity) {
         requireNonNull(resource, "resource should be not null");
         if (quantity <= 0) {
@@ -99,7 +90,6 @@ public class SimpleConsumptionMatrix implements MutableConsumptionMatrix {
         resourceQuantity.put(resource, quantity);
     }
 
-    @Override
     public void remove(Payload payload, Resource resource) {
         consumption.removeIf(tuple -> tuple.isXYEquals(payload, resource));
     }

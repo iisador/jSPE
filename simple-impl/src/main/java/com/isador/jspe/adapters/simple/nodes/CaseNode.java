@@ -4,26 +4,24 @@ import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.isador.jspe.core.nodes.CaseNode;
-
-public final class SimpleCaseNode extends AbstractCompoundNode implements CaseNode {
+public final class CaseNode extends AbstractCompoundNode {
 
     @Serial
     private static final long serialVersionUID = -1522668239964301791L;
 
     private final Map<String, Double> probabilities;
 
-    public SimpleCaseNode(String id, String title) {
+    public CaseNode(String id, String title) {
         super(id, title);
         this.probabilities = new HashMap<>();
     }
 
-    public SimpleCaseNode(String title) {
+    public CaseNode(String title) {
         super(title);
         this.probabilities = new HashMap<>();
     }
 
-    public SimpleCaseNode() {
+    public CaseNode() {
         super();
         this.probabilities = new HashMap<>();
     }

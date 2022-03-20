@@ -4,19 +4,12 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.isador.jspe.core.ConsumptionMatrix;
-import com.isador.jspe.core.ModelStatistic;
-import com.isador.jspe.core.Payload;
-import com.isador.jspe.core.Resource;
-import com.isador.jspe.core.StatisticCalculator;
+public class StatisticCalculator {
 
-public class SimpleStatisticCalculator implements StatisticCalculator<SimpleModel> {
+    public ModelStatistic calculate(SpeModel model) {
+        ModelStatistic statistic = new ModelStatistic();
 
-    @Override
-    public ModelStatistic calculate(SimpleModel model) {
-        SimpleModelStatistic statistic = new SimpleModelStatistic();
-
-        Map<Payload,Double> totalPayload = model.getNode()
+        Map<Payload, Double> totalPayload = model.getNode()
                 .orElseThrow(NullPointerException::new)
                 .calculatePayloadMatrix();
         statistic.setTotalPayload(totalPayload);
