@@ -14,15 +14,14 @@ public class SimpleNodeBuilder implements NodeBuilder<AbstractNode> {
     }
 
     public static SimpleNodeBuilder ofType(Types nodeType) {
-        switch (nodeType) {
-            case BASIC -> return basicNodeBuilder();
-            case CASE -> return caseNodeBuilder();
-            case EXPANDED -> return expandedNodeBuilder();
-            case PARDO -> return pardoNodeBuilder();
-            case REPETITION -> return repetitionNodeBuilder();
-            case SPLIT -> return splitNodeBuilder();
-            default -> throw new UnsupportedOperationException();
-        }
+        return switch (nodeType) {
+            case BASIC -> basicNodeBuilder();
+            case CASE ->  caseNodeBuilder();
+            case EXPANDED -> expandedNodeBuilder();
+            case PARDO -> pardoNodeBuilder();
+            case REPETITION -> repetitionNodeBuilder();
+            case SPLIT -> splitNodeBuilder();
+        };
     }
 
     public static SimpleNodeBuilder basicNodeBuilder() {

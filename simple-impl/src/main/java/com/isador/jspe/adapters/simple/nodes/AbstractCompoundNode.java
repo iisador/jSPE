@@ -11,7 +11,7 @@ public abstract class AbstractCompoundNode extends AbstractNode {
     @Serial
     private static final long serialVersionUID = -4308360272398863165L;
 
-    protected final List<AbstractNode> childs;
+    private final List<AbstractNode> childs;
 
     public AbstractCompoundNode(String id, String title) {
         super(id, title);

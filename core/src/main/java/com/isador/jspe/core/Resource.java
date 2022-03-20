@@ -29,36 +29,25 @@ public class Resource implements Serializable {
      * Создание объекта ресурса.
      *
      * @param id    ID нового ресурса
-     * @param title имя ресурса
      *
-     * @throws NullPointerException     если ID == null или title == null
-     * @throws IllegalArgumentException если id.isBlank() или title.isBlank()
+     * @throws NullPointerException     если ID == null
      * @since 1.0.0
      */
-    public Resource(String id, String title) {
+    public Resource(String id) {
         this.id = requireNonNull(id, "id should be not null");
         if (id.isBlank()) {
             throw new IllegalArgumentException("id should be not blank");
         }
-
-        if (title != null && title.isBlank()) {
-            throw new IllegalArgumentException("title should be not blank");
-        }
-        this.title = title;
     }
 
     /**
-     * Создание объекта ресурса с рандомным ID и названием.
+     * Создание объекта ресурса с рандомным ID.
      *
-     * @param title имя ресурса.
-     *
-     * @throws NullPointerException     если title == null
-     * @throws IllegalArgumentException если title.isBlank()
      * @see UUID
      * @since 1.0.0
      */
-    public Resource(String title) {
-        this(UUID.randomUUID().toString(), title);
+    public Resource() {
+        this(UUID.randomUUID().toString());
     }
 
     //<editor-fold desc="g\s">

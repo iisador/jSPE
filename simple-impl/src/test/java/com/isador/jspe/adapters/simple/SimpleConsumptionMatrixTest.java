@@ -1,7 +1,10 @@
-package com.isador.jspe.core;
+package com.isador.jspe.adapters.simple;
 
 import java.util.Collection;
 
+import com.isador.jspe.core.Payload;
+import com.isador.jspe.core.Resource;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -76,7 +79,7 @@ class SimpleConsumptionMatrixTest {
         Resource resource1 = new Resource("mem");
         Resource resource2 = new Resource("cpu");
 
-        assertDoesNotThrow(() -> matrix.getMappedResources(null));
+        Assertions.assertDoesNotThrow(() -> matrix.getMappedResources(null));
 
         Collection<Resource> actualMappedResources = matrix.getMappedResources(null);
         assertNotNull(actualMappedResources, "Invalid mapped resources collection");
