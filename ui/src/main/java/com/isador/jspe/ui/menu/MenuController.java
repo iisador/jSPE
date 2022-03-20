@@ -1,4 +1,4 @@
-package com.isador.jspe.ui;
+package com.isador.jspe.ui.menu;
 
 import jakarta.enterprise.context.ApplicationScoped;
 

@@ -1,4 +1,4 @@
-package com.isador.jspe.ui;
+package com.isador.jspe.ui.core;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

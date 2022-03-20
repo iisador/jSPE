@@ -2,6 +2,7 @@ package com.isador.jspe.ui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Event;
@@ -19,13 +20,16 @@ public class FXMLLoaderBean {
 
     private final Event<Scene> event;
     private final FXMLLoader fxmlLoader;
+    private final ResourceBundle resourceBundle;
     private Scene scene;
     private SeContainer container;
 
     @Inject
-    public FXMLLoaderBean(Event<Scene> event) {
+    public FXMLLoaderBean(Event<Scene> event, ResourceBundle resourceBundle) {
         fxmlLoader = new FXMLLoader();
+        fxmlLoader.setResources(resourceBundle);
         this.event = event;
+        this.resourceBundle = resourceBundle;
     }
 
     public void setContainer(SeContainer container) {
@@ -46,7 +50,7 @@ public class FXMLLoaderBean {
         scene.addEventFilter(MouseEvent.ANY, new GlobalMouseEventHandler());
         stage.setScene(scene);
         stage.setResizable(true);
-        stage.setTitle("super programma");
+        stage.setTitle(resourceBundle.getString("title"));
         stage.show();
         event.fire(scene);
     }

@@ -5,8 +5,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.VBox?>
-<TitledPane xmlns:fx="http://javafx.com/fxml/1" animated="false" prefHeight="600.0" prefWidth="800.0" text="Resources"
-            xmlns="http://javafx.com/javafx/16" fx:controller="com.isador.jspe.ui.ResourcesController">
+<TitledPane xmlns:fx="http://javafx.com/fxml/1" animated="false" prefHeight="600.0" prefWidth="800.0"
+            text="%resource.title" xmlns="http://javafx.com/javafx/16"
+            fx:controller="com.isador.jspe.ui.resources.ResourcesController">
     <VBox>
         <TableView id="resources" editable="true" onMouseClicked="#resourceSelected">
             <columnResizePolicy>
@@ -15,8 +16,9 @@
         </TableView>
         <ButtonBar>
             <buttons>
-                <Button onMouseClicked="#addResource" text="+"/>
-                <Button id="btnRemoveResource" onMouseClicked="#removeResource" text="-" disable="true"/>
+                <Button id="btnAddResource" onMouseClicked="#addResource" text="%resource.btn_add_row"/>
+                <Button id="btnRemoveResource" disable="true" onMouseClicked="#removeResource"
+                        text="%resource.btn_delete_row"/>
             </buttons>
         </ButtonBar>
     </VBox>

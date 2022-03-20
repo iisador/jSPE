@@ -5,8 +5,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.VBox?>
-<TitledPane xmlns:fx="http://javafx.com/fxml/1" animated="false" prefHeight="600.0" prefWidth="800.0" text="Payloads"
-            xmlns="http://javafx.com/javafx/16" fx:controller="com.isador.jspe.ui.PayloadsController">
+<TitledPane xmlns:fx="http://javafx.com/fxml/1" animated="false" prefHeight="600.0" prefWidth="800.0"
+            text="%payload.title"
+            xmlns="http://javafx.com/javafx/16" fx:controller="com.isador.jspe.ui.payloads.PayloadsController">
     <VBox>
         <TableView id="payloads">
             <columnResizePolicy>
@@ -15,8 +16,9 @@
         </TableView>
         <ButtonBar>
             <buttons>
-                <Button onMouseClicked="#addPayload" text="+"/>
-                <Button id="btnRemovePayload" onMouseClicked="#removePayload" text="-" disable="true"/>
+                <Button id="btnAddPayload" onMouseClicked="#addPayload" text="%payload.btn_add_row"/>
+                <Button id="btnRemovePayload" onMouseClicked="#removePayload" text="%payload.btn_delete_row"
+                        disable="true"/>
             </buttons>
         </ButtonBar>
     </VBox>

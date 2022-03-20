@@ -1,4 +1,4 @@
-package com.isador.jspe.ui;
+package com.isador.jspe.ui.core;
 
 import java.util.UUID;
 

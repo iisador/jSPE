@@ -1,4 +1,4 @@
-package com.isador.jspe.ui;
+package com.isador.jspe.ui.payloads;
 
 import com.isador.jspe.core.Payload;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -6,7 +6,6 @@ import jakarta.enterprise.event.Observes;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
 
 @ApplicationScoped
 public class PayloadsController {
@@ -20,9 +19,9 @@ public class PayloadsController {
         btnRemovePayload = (Button) scene.lookup("#btnRemovePayload");
     }
 
-    public void addPayload(MouseEvent event) {
+    public void addPayload() {
     }
 
-    public void removePayload(MouseEvent event) {
+    public void removePayload() {
     }
 }

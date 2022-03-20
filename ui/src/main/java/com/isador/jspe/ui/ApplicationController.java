@@ -1,12 +1,13 @@
 package com.isador.jspe.ui;
 
+import com.isador.jspe.ui.core.RectangleFactory;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 @ApplicationScoped
-public class MainController {
+public class ApplicationController {
 
     private RectangleFactory rectangleFactory;
 
