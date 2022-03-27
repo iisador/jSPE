@@ -1,4 +1,4 @@
-package com.isador.jspe.core;
+package ru.isador.jspe.core;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;

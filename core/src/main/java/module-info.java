@@ -1,4 +1,4 @@
-module com.isador.jspe.core {
-    exports com.isador.jspe.core;
-    exports com.isador.jspe.core.nodes;
+module ru.isador.jspe.core {
+    exports ru.isador.jspe.core;
+    exports ru.isador.jspe.core.nodes;
 }

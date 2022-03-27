@@ -1,8 +1,8 @@
-package com.isador.jspe.adapters.simple.nodes;
+package ru.isador.jspe.adapters.simple.nodes;
 
 import java.io.Serial;
 
-import com.isador.jspe.core.Payload;
+import ru.isador.jspe.core.Payload;
 
 public class TestNode extends AbstractNode {
 

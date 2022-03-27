@@ -1,9 +1,9 @@
-package com.isador.jspe.adapters.simple;
+package ru.isador.jspe.adapters.simple;
 
 import java.util.Collection;
 
-import com.isador.jspe.core.Payload;
-import com.isador.jspe.core.Resource;
+import ru.isador.jspe.core.Payload;
+import ru.isador.jspe.core.Resource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

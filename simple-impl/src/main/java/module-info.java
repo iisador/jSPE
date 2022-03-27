@@ -1,9 +1,9 @@
-module com.isador.jspe.adapters.simple {
-    exports com.isador.jspe.adapters.simple;
-    exports com.isador.jspe.adapters.simple.nodes;
+module ru.isador.jspe.adapters.simple {
+    exports ru.isador.jspe.adapters.simple;
+    exports ru.isador.jspe.adapters.simple.nodes;
 
-    requires com.isador.jspe.core;
+    requires ru.isador.jspe.core;
 
-    provides com.isador.jspe.core.ModelBuilderFactory with
-            com.isador.jspe.adapters.simple.SimpleModelBuilderFactory;
+    provides ru.isador.jspe.core.ModelBuilderFactory with
+            ru.isador.jspe.adapters.simple.SimpleModelBuilderFactory;
 }

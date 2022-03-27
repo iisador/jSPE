@@ -1,9 +1,9 @@
-package com.isador.jspe.adapters.simple;
+package ru.isador.jspe.adapters.simple;
 
 import java.io.Serial;
 
-import com.isador.jspe.adapters.simple.nodes.AbstractNode;
-import com.isador.jspe.core.Payload;
+import ru.isador.jspe.adapters.simple.nodes.AbstractNode;
+import ru.isador.jspe.core.Payload;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
