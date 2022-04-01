@@ -1,5 +1,6 @@
 module ru.isador.jspe {
-    requires ru.isador.jspe.core;
+    uses ru.isador.jspe.api.ProjectFactory;
+    requires ru.isador.jspe.api;
     requires javafx.controls;
     requires javafx.fxml;
 

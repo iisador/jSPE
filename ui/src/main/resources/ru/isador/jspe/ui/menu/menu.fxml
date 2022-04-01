@@ -7,7 +7,7 @@
 <MenuBar xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.isador.jspe.ui.menu.MenuController"
          id="systemMenu" BorderPane.alignment="CENTER">
     <Menu id="menuFile" mnemonicParsing="false" text="%menu.file">
-        <MenuItem id="itemFileNewProject" mnemonicParsing="false" text="%menu.file.new_project"/>
+        <MenuItem id="itemFileNewProject" mnemonicParsing="false" text="%menu.file.new_project" onAction="#newProjectCLicked"/>
         <MenuItem id="itemFileClose" mnemonicParsing="false" text="%menu.file.close"/>
     </Menu>
     <Menu id="menuEdit" mnemonicParsing="false" text="%menu.edit">

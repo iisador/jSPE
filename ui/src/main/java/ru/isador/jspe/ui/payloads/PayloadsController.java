@@ -1,11 +1,11 @@
 package ru.isador.jspe.ui.payloads;
 
-import ru.isador.jspe.core.Payload;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import ru.isador.jspe.api.Payload;
 
 @ApplicationScoped
 public class PayloadsController {
