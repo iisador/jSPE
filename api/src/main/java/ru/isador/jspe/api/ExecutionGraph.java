@@ -3,35 +3,36 @@ package ru.isador.jspe.api;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
-import ru.isador.jspe.api.node.Node;
+import ru.isador.jspe.api.nodes.Node;
 
-public interface ExecutionGraph extends Named {
+/**
+ * Граф выполнения.
+ *
+ * @since 1.0.0
+ */
+public interface ExecutionGraph {
 
-    String getDescription();
+    String getId();
 
-    void setDescription(String description);
+    void setId(String id);
 
-    LocalDateTime getModificationDatetime();
+    String getName();
 
-    void setModificationDatetime(LocalDateTime modificationDatetime);
-
-    boolean isMainEG();
-
-    void setMainEG(boolean mainEG);
-
-    Node getStartNode();
-
-    void setStartNode(Node node);
+    void setName(String name);
 
     Collection<Node> getNodes();
 
-    void addNode(Node node);
-
-    void removeNode(Node node);
-
     Collection<Arc> getArcs();
 
-    void addArc(Arc arc);
+    Node getStartNode();
 
-    void removeArc(Arc arc);
+    void setStartNode(Node startNode);
+
+    LocalDateTime getModificationDateTime();
+
+    void setModificationDateTime(LocalDateTime modificationDateTime);
+
+    float getDeadline();
+
+    void setDeadline(float deadline);
 }

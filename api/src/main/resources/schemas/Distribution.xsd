@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:spmif="spmif" targetNamespace="spmif" elementFormDefault="qualified" attributeFormDefault="unqualified" ecore:ignoreSubstitutionGroups="true">
+	<xs:simpleType name="positivefloat">
+		<xs:restriction base="xs:float">
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="Distribution" type="spmif:Distribution_type"/>
+	<xs:element name="ExponentialDist" type="spmif:Exponential_type" substitutionGroup="spmif:Distribution"/>
+	<xs:element name="ConstantDist" type="spmif:Constant_type" substitutionGroup="spmif:Distribution"/>
+	<xs:element name="NormalDist" type="spmif:Normal_type" substitutionGroup="spmif:Distribution"/>
+	<xs:element name="UniformDist" type="spmif:Uniform_type" substitutionGroup="spmif:Distribution"/>
+	<xs:element name="ErlangDist" type="spmif:Erlang_type" substitutionGroup="spmif:Distribution"/>
+	<xs:element name="HyperExpDist" type="spmif:HyperExponential_type" substitutionGroup="spmif:Distribution"/>
+	<xs:element name="UnknownDist" type="spmif:Unknown_type" substitutionGroup="spmif:Distribution"/>
+	<xs:complexType name="Distribution_type">
+		<xs:attribute name="Name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="Exponential_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:Distribution_type">
+				<xs:attribute name="Mean" type="spmif:positivefloat" use="required"/>	
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Constant_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:Distribution_type">
+				<xs:attribute name="Value" type="spmif:positivefloat" use="required"/>	
+				<xs:attribute name="Offset" type="spmif:positivefloat" use="optional"/>	
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Normal_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:Distribution_type">
+				<xs:attribute name="Mean" type="spmif:positivefloat" use="required"/>	
+				<xs:attribute name="StdDev" type="spmif:positivefloat" use="required"/>	
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Uniform_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:Distribution_type">
+				<xs:attribute name="Min" type="spmif:positivefloat" use="required"/>	
+				<xs:attribute name="Max" type="spmif:positivefloat" use="required"/>	
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Erlang_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:Distribution_type">
+				<xs:attribute name="Mean" type="spmif:positivefloat" use="required"/>	
+				<xs:attribute name="Variance" type="spmif:positivefloat" use="required"/>	
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="HyperExponential_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:Distribution_type">
+				<xs:attribute name="Mean" type="spmif:positivefloat" use="required"/>	
+				<xs:attribute name="Variance" type="spmif:positivefloat" use="required"/>	
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Unknown_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:Distribution_type">
+				<xs:attribute name="Mean" type="spmif:positivefloat" use="required"/>	
+				<xs:attribute name="Min" type="spmif:positivefloat" use="required"/>	
+				<xs:attribute name="Max" type="spmif:positivefloat" use="required"/>	
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+</xs:schema>

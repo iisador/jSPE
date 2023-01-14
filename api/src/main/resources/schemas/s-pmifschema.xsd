@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by Vittorio Cortellessa (Università dell'Aquila) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:spmif="spmif" targetNamespace="spmif" elementFormDefault="qualified" attributeFormDefault="unqualified" ecore:ignoreSubstitutionGroups="true">
+<xs:include schemaLocation="ComputerResourceRequirement.xsd" /> 
+<xs:include schemaLocation="Distribution.xsd" /> 
+
+	<xs:simpleType name="SPE_priority_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="probability_type">
+		<xs:restriction base="xs:float">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="partnerType_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SynchronousCall"/>
+			<xs:enumeration value="DeferredSynchronousCall"/>
+			<xs:enumeration value="AsynchronousCall"/>
+			<xs:enumeration value="NoReply"/>
+			<xs:enumeration value="Reply"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Project" type="spmif:Project_type"/>
+	<xs:complexType name="Project_type">
+		<xs:sequence>
+			<xs:element name="PerformanceScenario" type="spmif:PS_type" maxOccurs="unbounded"/>
+			<xs:element name="ServiceScenario" type="spmif:PS_type" maxOccurs="unbounded"/>
+			<xs:element ref="spmif:ComputerResourceRequirement" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="Project_Name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="PS_type">
+		<xs:sequence>
+			<xs:element name="ArrivalDistribution" type="spmif:Distribution_type" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ExecutionGraph" type="spmif:EG_type" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="ScenarioId" type="xs:ID" use="required"/>
+		<xs:attribute name="ScenarioName" type="xs:string" use="required"/>
+		<xs:attribute name="MainEG" type="xs:IDREF" use="required" ecore:reference="spmif:EG_type"/>
+		<xs:attribute name="InterarrivalTime" type="spmif:positivefloat" use="required"/>
+		<xs:attribute name="NumberOfJobs" type="xs:positiveInteger" use="optional"/>
+		<xs:attribute name="NumberOfInstances" type="xs:positiveInteger" use="optional"/>
+		<xs:attribute name="ResponseTimeRequirement" type="spmif:positivefloat" use="optional"/>
+		<xs:attribute name="ThroughputRequirement" type="spmif:positivefloat" use="optional"/>
+		<xs:attribute name="Priority" type="spmif:SPE_priority_type" use="optional"/>
+		<xs:attribute name="SWmodelfilename" type="xs:anyURI" use="optional"/>
+		<xs:attribute name="FacilityId" type="xs:IDREF" use="optional" ecore:reference="spmif:Facility_type"/>
+	</xs:complexType>
+	<xs:element name="Node" type="spmif:Node_type"/>
+	<xs:element name="ProcessingNode" type="spmif:ProcessingNode_type" substitutionGroup="spmif:Node"/>
+	<xs:element name="BasicNode" type="spmif:BasicNode_type" substitutionGroup="spmif:Node"/>
+	<xs:element name="LinkNode" type="spmif:LinkNode_type" substitutionGroup="spmif:ProcessingNode"/>
+	<xs:element name="SynchronizationNode" type="spmif:SynchronizationNode_type" substitutionGroup="spmif:ProcessingNode"/>
+	<xs:element name="ExpandedNode" type="spmif:ExpandedNode_type" substitutionGroup="spmif:ProcessingNode"/>
+	<xs:element name="CompoundNode" type="spmif:CompoundNode_type" substitutionGroup="spmif:Node"/>
+	<xs:element name="RepetitionNode" type="spmif:RepetitionNode_type" substitutionGroup="spmif:CompoundNode"/>
+	<xs:element name="SplitNode" type="spmif:SplitNode_type" substitutionGroup="spmif:CompoundNode"/>
+	<xs:element name="PardoNode" type="spmif:PardoNode_type" substitutionGroup="spmif:CompoundNode"/>
+	<xs:element name="CaseNode" type="spmif:CaseNode_type" substitutionGroup="spmif:CompoundNode"/>
+	<xs:complexType name="EG_type">
+		<xs:sequence>
+			<xs:element name="Node" type="spmif:Node_type" maxOccurs="unbounded"/>
+			<xs:element name="Arc" type="spmif:Arc_type" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="EGname" type="xs:string" use="required"/>
+		<xs:attribute name="EGId" type="xs:ID" use="required"/>
+		<xs:attribute name="StartNode" type="xs:IDREF" use="required" ecore:reference="spmif:Node_type"/>
+		<xs:attribute name="ModificationDateTime" type="xs:dateTime" use="optional"/>
+		<xs:attribute name="SWmodelname" type="xs:string" use="optional"/>
+		<xs:attribute name="SWdescription" type="xs:string" use="optional"/>
+		<xs:attribute name="Deadline" type="spmif:positivefloat" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="Arc_type">
+		<xs:attribute name="FromNode" type="xs:IDREF" use="required" ecore:reference="spmif:Node_type"/>
+		<xs:attribute name="ToNode" type="xs:IDREF" use="required" ecore:reference="spmif:Node_type"/>
+	</xs:complexType>
+	<xs:complexType name="SWResourceRequirement_type">
+		<xs:attribute name="SWResourceId" type="xs:IDREF" use="required" ecore:reference="spmif:SoftwareResource_type"/>
+		<xs:attribute name="UnitsOfService" type="spmif:positivefloat" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ProcessingNode_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:Node_type">
+				<xs:attribute name="Probability" type="spmif:probability_type" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ExpandedNode_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:ProcessingNode_type">
+				<xs:attribute name="EGId" type="xs:IDREF" use="required" ecore:reference="spmif:EG_type"/>
+				<xs:attribute name="EGname" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CompoundNode_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:Node_type">
+				<xs:sequence>
+					<xs:element name="Node" type="spmif:ProcessingNode_type" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LinkNode_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:ProcessingNode_type">
+				<xs:attribute name="ServiceScenario" type="xs:IDREF" use="required" ecore:reference="spmif:PS_type"/>
+				<xs:attribute name="ScenarioFilename" type="xs:anyURI" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RepetitionNode_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:CompoundNode_type">
+<!-- What is the sequence for here? There can only be one node attached to a RepetitionNode. -->
+				<xs:sequence/>
+				<xs:attribute name="RepetitionFactor" type="spmif:positivefloat" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SynchronizationNode_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:ProcessingNode_type">
+				<xs:attribute name="myType" type="spmif:partnerType_type" use="required"/>
+				<xs:attribute name="partnerScenario" type="xs:IDREF" use="required" ecore:reference="spmif:PS_type"/>
+				<xs:attribute name="partnerFileName" type="xs:anyURI" use="optional"/>
+				<xs:attribute name="partnerName" type="xs:string" use="required"/>
+				<xs:attribute name="partnerId" type="xs:IDREF" use="required" ecore:reference="spmif:SynchronizationNode_type"/>
+				<xs:attribute name="partnerType" type="spmif:partnerType_type" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BasicNode_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:ProcessingNode_type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Node_type">
+		<xs:sequence>
+			<xs:element name="SWResourceRequirement" type="spmif:SWResourceRequirement_type" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="NodeName" type="xs:string" use="required"/>
+		<xs:attribute name="NodeId" type="xs:ID" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="CaseNode_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:CompoundNode_type">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SplitNode_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:CompoundNode_type">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PardoNode_type">
+		<xs:complexContent>
+			<xs:extension base="spmif:CompoundNode_type">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+</xs:schema>

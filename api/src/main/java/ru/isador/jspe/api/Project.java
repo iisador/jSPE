@@ -2,11 +2,20 @@ package ru.isador.jspe.api;
 
 import java.util.Collection;
 
-public interface Project extends Named {
+/**
+ * Собсно модель системы.
+ *
+ * @since 1.0.0
+ */
+public interface Project {
 
-    Collection<PerformanceScenario> getPerformanceScenarios();
+    String getName();
 
-    void addPerformanceScenario(PerformanceScenario performanceScenario);
+    void setName(String name);
 
-    void removePerformanceScenario(PerformanceScenario performanceScenario);
+    Collection<Scenario> getPerformanceScenarios();
+
+    Collection<Scenario> getServiceScenarios();
+
+    Collection<ComputerResourceRequirement> getComputerResourceRequirements();
 }

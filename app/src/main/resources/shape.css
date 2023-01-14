@@ -1,0 +1,16 @@
+.shape {
+    -fx-fill: darkgrey;
+    -fx-stroke: grey;
+}
+
+.shape-border {
+    -fx-fill:transparent;
+    -fx-stroke: transparent;
+}
+
+.shape-border:hover {
+    -fx-stroke: black;
+    -fx-stroke-dash-array: 6;
+    -fx-stroke-dash-offset: 10;
+    -fx-cursor: move;
+}

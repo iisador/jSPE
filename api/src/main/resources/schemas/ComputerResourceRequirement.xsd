@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by Vittorio Cortellessa (Università dell'Aquila) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" elementFormDefault="qualified" attributeFormDefault="unqualified" targetNamespace="spmif" xmlns:spmif="spmif">
+	<xs:include schemaLocation="Distribution.xsd" /> 
+	<xs:element name="Facility" type="spmif:Facility_type">
+		<xs:annotation>
+			<xs:documentation>The Facility and Servers it contains.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="Facility_type">
+		<xs:sequence>
+			<xs:element name="Server" type="spmif:Server_type" maxOccurs="unbounded"/>
+			<xs:element name="OverheadMatrix" type="spmif:OverheadMatrix_type" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="FacilityName" type="xs:string" use="required"/>
+		<xs:attribute name="FacilityId" type="xs:ID" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="Server_type">
+		<xs:sequence>
+				<xs:element name="ServiceDistribution" type="spmif:Distribution_type" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="ServerName" use="required"/>
+		<xs:attribute name="ServerId" type="xs:ID" use="required"/>
+		<xs:attribute name="ServerKind" type="spmif:ServerKind_type" use="optional"/>
+		<xs:attribute name="ServerRequest" type="spmif:ServerRequest_type" use="optional"/>
+		<xs:attribute name="Quantity" type="xs:nonNegativeInteger" use="required"/>
+		<xs:attribute name="SchedulingPolicy" type="spmif:SchedulingPolicy_type" use="required"/>
+		<xs:attribute name="ServiceUnits" use="required"/>
+		<xs:attribute name="ServiceTime" type="spmif:nonnegativefloat" use="optional"/>
+	</xs:complexType>
+	<xs:simpleType name="ServerKind_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Server"/>
+			<xs:enumeration value="WorkUnitServer"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ServerRequest_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NonFCFSTimeSpec"/>
+			<xs:enumeration value="NonFCFSDemandSpec"/>
+			<xs:enumeration value="NonFCFSVisitSpec"/>
+			<xs:enumeration value="FCFSWorkUnitSpec"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SchedulingPolicy_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="FCFS"/>
+			<xs:enumeration value="PS"/>
+			<xs:enumeration value="IS"/>
+			<xs:enumeration value="RR"/>
+			<xs:enumeration value="PR"/>
+			<xs:enumeration value="LCFSPR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="nonnegativefloat">
+		<xs:restriction base="xs:float">
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ComputerResourceRequirement" type="spmif:ComputerResourceRequirement_type">
+		<xs:annotation>
+			<xs:documentation>ComputerResourceRequirements are derived by mapping Software resources to Facilities with an 
+			Overhead Matrix</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ComputerResourceRequirement_type">
+		<xs:sequence>
+			<xs:element name="SoftwareResource" type="spmif:SoftwareResource_type"  maxOccurs="unbounded"/>
+			<xs:element name="Facility" type="spmif:Facility_type" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SoftwareResource_type">
+		<xs:attribute name="SWResourceName" type="xs:string" use="required"/>
+		<xs:attribute name="SWResourceId" type="xs:ID" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="OverheadMatrix_type">
+		<xs:sequence>
+			<xs:element name="OMElement" type="spmif:OMElement_type" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OMElement_type">
+		<xs:attribute name="SWResourceId" type="xs:IDREF" ecore:reference="spmif:SoftwareResource_type" use="required"/>
+		<xs:attribute name="ServerId" type="xs:IDREF" ecore:reference="spmif:Server_type" use="required"/>
+		<xs:attribute name="AmountOfService" type="spmif:nonnegativefloat" use="required"/>
+	</xs:complexType>
+</xs:schema>
