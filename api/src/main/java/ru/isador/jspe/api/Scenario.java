@@ -2,7 +2,9 @@ package ru.isador.jspe.api;
 
 import java.util.Collection;
 
-import ru.isador.jspe.api.distributions.Distribution;
+import ru.isador.jspe.api.facility.Facility;
+import ru.isador.jspe.api.facility.distributions.Distribution;
+import ru.isador.jspe.api.graph.ExecutionGraph;
 
 /**
  * Сценарий выполнения.
@@ -29,8 +31,6 @@ public interface Scenario {
     Collection<ExecutionGraph> getExecutionGraphs();
 
     ExecutionGraph getMainGraph();
-
-    void setMainGraph(ExecutionGraph mainGraph);
 
     float getInterarrivalTime();
 

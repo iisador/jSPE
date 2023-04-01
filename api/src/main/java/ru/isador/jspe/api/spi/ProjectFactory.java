@@ -2,7 +2,7 @@ package ru.isador.jspe.api.spi;
 
 import ru.isador.jspe.api.Project;
 
-public interface ProjectFactory {
+public interface ProjectFactory<T extends Project> {
 
-    Project create(String name);
+    T create(String name);
 }
